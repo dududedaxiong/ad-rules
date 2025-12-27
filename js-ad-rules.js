@@ -1,4 +1,4 @@
-/{
+{
     "*": {
         "keywords": [
             {
@@ -61,15 +61,6 @@
         "grok",
         "hohai"
     ],
-    "/www\\.yy\\d+\\.com/": {
-        "keywords": [],
-        "classes": [],
-        "selectors": [
-            "2"
-        ],
-        "idsToHide": [],
-        "interval": 1600
-    },
     "avtoday.io": {
         "keywords": [
             {
