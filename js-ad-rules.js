@@ -114,6 +114,7 @@
             "u-popup__content"
         ],
         "selectors": [
+            "div#smailCarousel",
             "div.text-adv-list.child_div_random",
             "uni-view.cooperation",
             "uni-view.tabbar-list",
