@@ -106,6 +106,7 @@
         "keywords": [],
         "classes": [
             "header-avatar",
+            "info",
             "news-box",
             "relative",
             "square-advertisement",
@@ -113,11 +114,15 @@
             "u-popup__content"
         ],
         "selectors": [
+            "div.text-adv-list.child_div_random",
             "uni-view.cooperation",
             "uni-view.tabbar-list",
             "uni-view.text-adv-list"
         ],
-        "idsToHide": [],
+        "idsToHide": [
+            "indexPopAd",
+            "smailCarousel"
+        ],
         "interval": 1600
     }
 }
