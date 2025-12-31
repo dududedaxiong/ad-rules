@@ -110,6 +110,7 @@
             "news-box",
             "relative",
             "square-advertisement",
+            "tabbar-list",
             "u-notice-bar",
             "u-popup__content"
         ],
