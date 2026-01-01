@@ -123,8 +123,18 @@
         ],
         "idsToHide": [
             "indexPopAd",
+            "smailCarouse",
             "smailCarousel"
         ],
+        "interval": 1600
+    },
+    "看看": {
+        "keywords": [],
+        "classes": [
+            "carousel-long"
+        ],
+        "selectors": [],
+        "idsToHide": [],
         "interval": 1600
     }
 }
