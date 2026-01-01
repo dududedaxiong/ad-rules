@@ -106,6 +106,7 @@
         "keywords": [],
         "classes": [
             "carousel-long",
+            "cooperation",
             "header-avatar",
             "info",
             "news-box",
