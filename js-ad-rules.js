@@ -105,6 +105,7 @@
     "[看看]": {
         "keywords": [],
         "classes": [
+            "carousel-long",
             "header-avatar",
             "info",
             "news-box",
@@ -130,9 +131,7 @@
     },
     "看看": {
         "keywords": [],
-        "classes": [
-            "carousel-long"
-        ],
+        "classes": [],
         "selectors": [],
         "idsToHide": [],
         "interval": 1600
