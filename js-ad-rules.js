@@ -9,9 +9,7 @@
             }
         ],
         "classes": [
-            "carousel-inner",
             "relative",
-            "square-advertisement",
             "text-adv-list",
             "u-notice__content",
             "u-swiper",
@@ -19,7 +17,6 @@
         ],
         "selectors": [
             "ads",
-            "div.square-advertisement.child_div_random",
             "div.uni-swiper-slides[style=\"inset: 0px;\"]",
             "i.icon.iconfont.icon-account",
             "uni-view.news-box",
@@ -108,8 +105,10 @@
     "[看看]": {
         "keywords": [],
         "classes": [
+            "carousel-inner",
             "carousel-long",
             "cooperation",
+            "every-box",
             "header-avatar",
             "info",
             "news-box",
@@ -121,6 +120,7 @@
         ],
         "selectors": [
             "div#smailCarousel",
+            "div.square-advertisement.child_div_random",
             "div.text-adv-list.child_div_random",
             "uni-view.cooperation",
             "uni-view.tabbar-list",
