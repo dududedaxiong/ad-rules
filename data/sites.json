@@ -1,0 +1,60 @@
+{
+    "tip": "请收藏本站，防止失联！永久地址：网站",
+    "sites": [
+        {
+            "title": "加速网站",
+            "url": "..\/免翻解析.php",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "IPTV后台管理",
+            "url": "..\/XFMIPTV\/index.php",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "Clash规则处理",
+            "url": "..\/clash\/index.php",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "本地推送",
+            "url": "..\/推送\/本地文件推送.php",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "随机小姐姐视频",
+            "url": "..\/小姐姐1",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "直播源二次代理",
+            "url": "..\/直播源二次代理\/proxy.php",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "浏览器广告屏蔽js规则",
+            "url": "..\/浏览器广告屏蔽\/",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "本地文件加密混淆推送",
+            "url": "..\/推送\/本地加密解密.html",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "m3u8在线播放",
+            "url": "..\/XFMIPTV\/海阔复制快捷播放.php",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "m3u8视频去广告规则",
+            "url": "..\/m3u8去广告规则\/",
+            "icon": "static\/picture\/icon01.png"
+        },
+        {
+            "title": "弹幕播放器",
+            "url": "..\/播放器\/admin",
+            "icon": "static\/picture\/icon01.png"
+        }
+    ]
+}
