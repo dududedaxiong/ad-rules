@@ -9,7 +9,9 @@
             }
         ],
         "classes": [
+            "carousel-inner",
             "relative",
+            "square-advertisement",
             "text-adv-list",
             "u-notice__content",
             "u-swiper",
@@ -17,6 +19,7 @@
         ],
         "selectors": [
             "ads",
+            "div.square-advertisement.child_div_random",
             "div.uni-swiper-slides[style=\"inset: 0px;\"]",
             "i.icon.iconfont.icon-account",
             "uni-view.news-box",
