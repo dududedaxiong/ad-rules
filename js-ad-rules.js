@@ -143,10 +143,12 @@
     "m.mgtv.com": {
         "keywords": [],
         "classes": [
+            "container",
             "flex-wrapper",
             "wx-label-wrap-inner-cont"
         ],
         "selectors": [
+            "div.video-about.mg-stat",
             "div.video-area-bar.fstp-mark"
         ],
         "idsToHide": [],
