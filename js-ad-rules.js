@@ -139,5 +139,17 @@
         "selectors": [],
         "idsToHide": [],
         "interval": 1600
+    },
+    "m.mgtv.com": {
+        "keywords": [],
+        "classes": [
+            "flex-wrapper",
+            "wx-label-wrap-inner-cont"
+        ],
+        "selectors": [
+            "div.video-area-bar.fstp-mark"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
