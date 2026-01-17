@@ -1,0 +1,4 @@
+# YouTube 前缀补全规则
+https://www.youtube.com|webview://
+https://youtu.be|webview://
+https://m.youtube.com|webview://
