@@ -1,15 +1,5 @@
 [
     {
-        "name": "16t0k.top",
-        "hosts": [
-            "16t0k.top",
-            "l6t0k.top"
-        ],
-        "regex": [
-            "#EXTINF:[\\s\\S]*?001\\.ts"
-        ]
-    },
-    {
         "hosts": [
             "kuaikan"
         ],
@@ -21,12 +11,23 @@
         ]
     },
     {
+        "name": "16t0k.top",
+        "hosts": [
+            "16t0k.top",
+            "l6t0k.top"
+        ],
+        "regex": [
+            "#EXTINF:[\\s\\S]*?001\\.ts"
+        ]
+    },
+    {
         "name": "开源棋牌",
         "hosts": [
             "askzycdn",
             "jkunbf",
             "bfikuncdn",
-            "bfaskcdn"
+            "bfaskcdn",
+            "ddcdnbf"
         ],
         "regex": [
             "#EXTINF.*?\\s+.*?aaaa.*?\\.ts\\s+",
@@ -112,6 +113,7 @@
         ]
     },
     {
+        "name": "熊猫视频",
         "hosts": [
             "seu6tu",
             "535fs",
@@ -119,9 +121,8 @@
             "hdvjl",
             "xsmj"
         ],
-        "name": "熊猫视频",
         "regex": [
-            "#EXTINF:[\\s\\S]*?encrypt0004\\.ts"
+            "#EXTINF:[\\s\\S]*?encrypt0005\\.ts"
         ]
     },
     {
@@ -220,7 +221,8 @@
             "xibaom3.top"
         ],
         "regex": [
-            "#EXT-X-DISCONTINUITY[\\s\\S]*?ad.*?\\.ts"
+            "#EXT-X-DISCONTINUITY[\\s\\S]*?ad.*?\\.ts",
+            "\/#EXT-X-DISCONTINUITY[\\s\\S]*?ad00[\\s\\S]*?#EXT-X-DISCONTINUITY\/im"
         ]
     },
     {
@@ -320,6 +322,15 @@
         ],
         "regex": [
             "不痛快"
+        ]
+    },
+    {
+        "name": "红杏",
+        "hosts": [
+            "v7.slv"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     }
 ]
