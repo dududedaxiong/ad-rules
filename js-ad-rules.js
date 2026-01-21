@@ -46,6 +46,7 @@
         ],
         "classes": [
             "mda",
+            "player-info",
             "van-overlay",
             "van-popup"
         ],
