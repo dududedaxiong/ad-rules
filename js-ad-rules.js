@@ -51,6 +51,7 @@
         ],
         "selectors": [
             "div.van-popup.van-popup--center.van-dialog.van-dialog--round-button",
+            "div[style=\"display:block;\"]",
             "span[style=\"color: gold\"]"
         ],
         "idsToHide": [],
