@@ -182,3 +182,8 @@
 ##img[click_area="pic_url"]
 |https://**huadu**.com##i.icon.iconfont.icon-account
 |https://**hdys**.com##i.icon.iconfont.icon-account
+##div[style="max-width:990px; margin:0 auto;"]
+##div[style="max-width:990px; margin:0 auto;text-align:center;"]
+|https://snapany.com/**/chunks/**.js
+|https://**/public/axios.min.js
+|https://**/PicWorker.js?v=**
