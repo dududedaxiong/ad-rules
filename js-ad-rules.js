@@ -62,7 +62,7 @@
             "span[style=\"color: gold\"]"
         ],
         "idsToHide": [],
-        "interval": 1600
+        "interval": 1000
     },
     "_exclude": [
         "127.0.0.1",
