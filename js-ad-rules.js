@@ -36,7 +36,8 @@
     
     "blockUrls": [
     "https://**/public/axios.min.js",
-    "https://**/public/worker/PicWorker.js?v=**"
+    "https://**/public/worker/PicWorker.js?v=**",
+    "https://**.icu/**?**"
   ],
         "keywords": [
         
