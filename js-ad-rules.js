@@ -130,6 +130,7 @@
             "div.square-advertisement.child_div_random",
             "div.text-adv-list.child_div_random",
             "uni-view.cooperation",
+            "uni-view.cooperation > uni-view.every-box",
             "uni-view.tabbar-list",
             "uni-view.text-adv-list",
             "uni-view[style=\"padding: 0px 20px; margin-top: 50px;\"]"
