@@ -58,6 +58,7 @@
         "selectors": [
             "div.van-popup.van-popup--center.van-dialog.van-dialog--round-button",
             "div[style=\"display:block;\"]",
+            "div[style=\"margin-bottom: 10px;\"]",
             "span[style=\"color: gold\"]"
         ],
         "idsToHide": [],
@@ -129,7 +130,6 @@
             "div#smailCarousel",
             "div.square-advertisement.child_div_random",
             "div.text-adv-list.child_div_random",
-         
             "uni-view.cooperation > uni-view.every-box",
             "uni-view.tabbar-list",
             "uni-view.text-adv-list",
@@ -140,13 +140,6 @@
             "smailCarouse",
             "smailCarousel"
         ],
-        "interval": 1600
-    },
-    "看看": {
-        "keywords": [],
-        "classes": [],
-        "selectors": [],
-        "idsToHide": [],
         "interval": 1600
     },
     "m.mgtv.com": {
