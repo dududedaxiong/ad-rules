@@ -129,7 +129,7 @@
             "div#smailCarousel",
             "div.square-advertisement.child_div_random",
             "div.text-adv-list.child_div_random",
-            "uni-view.cooperation",
+         
             "uni-view.cooperation > uni-view.every-box",
             "uni-view.tabbar-list",
             "uni-view.text-adv-list",
