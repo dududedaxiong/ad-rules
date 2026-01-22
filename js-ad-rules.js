@@ -33,7 +33,13 @@
         "defaultInterval": 600
     },
     "/cn\\d+\\.91short\\.com/": {
+    
+    "blockUrls": [
+    "https://**/public/axios.min.js",
+    "https://**/public/worker/PicWorker.js?v=**"
+  ],
         "keywords": [
+        
             {
                 "selector": "a>span.van-tab__text",
                 "keywords": [
