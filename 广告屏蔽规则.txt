@@ -186,4 +186,3 @@
 ##div[style="max-width:990px; margin:0 auto;text-align:center;"]
 |https://snapany.com/**/chunks/**.js
 |https://**/public/axios.min.js
-|https://**/PicWorker.js?v=**
