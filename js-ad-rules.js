@@ -37,7 +37,7 @@
             "https://**/public/axios.min.js",
             "https://**/public/worker/PicWorker.js?v=**",
             "https://**.icu/**?**",
-            "http://**/public/ad**.js?v=**"
+            "http://**/public/ad**.js?v=**",
             "https://bmatdyz.icu/**"
         ],
         "keywords": [
