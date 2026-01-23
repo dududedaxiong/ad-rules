@@ -38,6 +38,7 @@
             "https://**/public/worker/PicWorker.js?v=**",
             "https://**.icu/**?**",
             "http://**/public/ad**.js?v=**"
+            "https://bmatdyz.icu/**"
         ],
         "keywords": [
             {
