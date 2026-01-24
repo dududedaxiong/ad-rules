@@ -189,7 +189,8 @@
         "keywords": [],
         "classes": [],
         "selectors": [
-            "div[style=\" max-width:990px; margin:0 auto;\"]"
+            "div[style=\" max-width:990px; margin:0 auto;\"]",
+            "div[style=\"max-width:990px; margin:0 auto;text-align:center;\"]"
         ],
         "idsToHide": [],
         "interval": 1600,
