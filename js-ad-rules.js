@@ -186,8 +186,19 @@
         "interval": 1600
     },
     "[黄色仓库]": {
-        "keywords": [],
-        "classes": [],
+        "keywords": [
+            {
+                "selector": "h3>div.qq>a",
+                "keywords": [
+                    "91Porn",
+                    "同志社区",
+                    "新葡京"
+                ]
+            }
+        ],
+        "classes": [
+            "container"
+        ],
         "selectors": [
             "div[style=\" max-width:990px; margin:0 auto;\"]",
             "div[style=\"max-width:990px; margin:0 auto;text-align:center;\"]",
