@@ -187,9 +187,7 @@
     },
     "[黄色仓库]": {
         "keywords": [],
-        "classes": [
-            "container"
-        ],
+        "classes": [],
         "selectors": [
             "div.stui-pannel__head.clearfix",
             "div[style=\" max-width:990px; margin:0 auto;\"]",
