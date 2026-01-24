@@ -201,12 +201,27 @@
             "http://.*/nnn2/\\d+\\.js"
         ]
     },
+    "pp15.xyz": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "script[src*='/00']",
+            "iframe[src*='00']"
+        ],
+        "idsToHide": [],
+        "interval": 500,
+        "blockUrls": [
+            "/\\/00[a-z0-9_]{5,}\\.js/i",
+            "/.*\\/00.*\\/.*\\.js/i"
+        ]
+    },
     "[暖暖]": {
         "keywords": [],
         "classes": [],
-        "selectors": [],
+        "selectors": [
+            "a[target=\"_blank\"]"
+        ],
         "idsToHide": [],
-        "interval": 1600,
-        "blockUrls": ["/00.*\\.js/"]
+        "interval": 1600
     }
 }
