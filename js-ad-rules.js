@@ -1,28 +1,26 @@
 {
-    
-  "*": {
-    "blockUrls": [
-      "*googlesyndication.com*",
-      "*doubleclick.net*",
-      "*adservice.google.*",
-      "*pagead2.googlesyndication.com*",
-      "*ads.yahoo.com*",
-      "*adnxs.com*",
-      "*pubmatic.com*",
-      "*criteo.com*",
-      "*taboola.com*",
-      "*outbrain.com*",
-      "*revcontent.com*",
-      "*mgid.com*",
-      "*push.*",            
-      "*notification.*",
-      "*onesignal.com*",
-      "*bmatdyz.icu*",       
-      "*/public/ad*.js*",    
-      "*/ads/*.js*",
-      "*/advertisement*.js*"
-    ],
-
+    "*": {
+        "blockUrls": [
+            "*googlesyndication.com*",
+            "*doubleclick.net*",
+            "*adservice.google.*",
+            "*pagead2.googlesyndication.com*",
+            "*ads.yahoo.com*",
+            "*adnxs.com*",
+            "*pubmatic.com*",
+            "*criteo.com*",
+            "*taboola.com*",
+            "*outbrain.com*",
+            "*revcontent.com*",
+            "*mgid.com*",
+            "*push.*",
+            "*notification.*",
+            "*onesignal.com*",
+            "*bmatdyz.icu*",
+            "*/public/ad*.js*",
+            "*/ads/*.js*",
+            "*/advertisement*.js*"
+        ],
         "keywords": [
             {
                 "selector": "li>a>font",
@@ -186,5 +184,15 @@
         ],
         "idsToHide": [],
         "interval": 1600
+    },
+    "[黄色仓库]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [],
+        "idsToHide": [],
+        "interval": 1600,
+        "blockUrls": [
+            "http://**/nnn\\d+/\\d+\\.js"
+        ]
     }
 }
