@@ -192,7 +192,7 @@
         "idsToHide": [],
         "interval": 1600,
         "blockUrls": [
-            "http://**/nnn\\d+/\\d+\\.js"
-        ]
+  "http://.*/nnn2/\\d+\\.js"
+]
     }
 }
