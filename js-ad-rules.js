@@ -188,7 +188,7 @@
     "[黄色仓库]": {
         "keywords": [
             {
-                "selector": "h3>div.qq>a",
+                "selector": "div.qq>a",
                 "keywords": [
                     "91Porn",
                     "同志社区",
