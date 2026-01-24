@@ -34,10 +34,10 @@
     },
     "/cn\\d+\\.91short\\.com/": {
         "blockUrls": [
-            "https://**/public/axios.min.js",
-            "https://**/public/worker/PicWorker.js?v=**",
-            "https://**.icu/**?**",
             "http://**/public/ad**.js?v=**",
+            "https://**.icu/**?**",
+            "https://**/public/axios.min.js",
+            "https://**/worker/PicWorker.js?v=**",
             "https://bmatdyz.icu/**"
         ],
         "keywords": [
@@ -119,6 +119,7 @@
             "carousel-long",
             "cooperation",
             "every-box",
+            "every-tabbar",
             "header-avatar",
             "info",
             "news-box",
@@ -142,7 +143,10 @@
             "smailCarouse",
             "smailCarousel"
         ],
-        "interval": 1600
+        "interval": 1600,
+        "blockUrls": [
+            "2588886663"
+        ]
     },
     "m.mgtv.com": {
         "keywords": [],
