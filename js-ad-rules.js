@@ -209,7 +209,8 @@
         "interval": 1600,
         "blockUrls": [
             "http**/00**.js",
-            "http**/sh/\\d+\\.js"
+            "http**/sh/\\d+\\.js",
+            "https://**/00**.js"
         ]
     }
 }
