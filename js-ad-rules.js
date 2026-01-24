@@ -1,5 +1,28 @@
 {
-    "*": {
+    
+  "*": {
+    "blockUrls": [
+      "*googlesyndication.com*",
+      "*doubleclick.net*",
+      "*adservice.google.*",
+      "*pagead2.googlesyndication.com*",
+      "*ads.yahoo.com*",
+      "*adnxs.com*",
+      "*pubmatic.com*",
+      "*criteo.com*",
+      "*taboola.com*",
+      "*outbrain.com*",
+      "*revcontent.com*",
+      "*mgid.com*",
+      "*push.*",            
+      "*notification.*",
+      "*onesignal.com*",
+      "*bmatdyz.icu*",       
+      "*/public/ad*.js*",    
+      "*/ads/*.js*",
+      "*/advertisement*.js*"
+    ],
+
         "keywords": [
             {
                 "selector": "li>a>font",
@@ -39,7 +62,8 @@
             "https://**/public/axios.min.js",
             "https://**/worker/PicWorker.js?v=**",
             "https://bmatdyz.icu/**",
-            "https://246886mc.ohdam3.com/**"
+            "https://246886mc.ohdam3.com/**",
+            "*/public/statics/js/*"
         ],
         "keywords": [
             {
