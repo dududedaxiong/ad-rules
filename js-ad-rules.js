@@ -57,7 +57,7 @@
     },
     "/cn\\d+\\.91short\\.com/": {
         "blockUrls": [
-            "*/public/ad*\.js?v=*",
+            "*/public/ad**v=*",
             "https://**.icu/**?**",
             "https://**/public/axios.min.js",
             "https://**/worker/PicWorker.js?v=**",
