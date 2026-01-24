@@ -188,11 +188,13 @@
     "[黄色仓库]": {
         "keywords": [],
         "classes": [],
-        "selectors": [],
+        "selectors": [
+            "div[style=\" max-width:990px; margin:0 auto;\"]"
+        ],
         "idsToHide": [],
         "interval": 1600,
         "blockUrls": [
-  "http://.*/nnn2/\\d+\\.js"
-]
+            "http://.*/nnn2/\\d+\\.js"
+        ]
     }
 }
