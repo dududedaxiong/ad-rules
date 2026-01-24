@@ -200,5 +200,16 @@
         "blockUrls": [
             "http://.*/nnn2/\\d+\\.js"
         ]
+    },
+    "[暖暖]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [],
+        "idsToHide": [],
+        "interval": 1600,
+        "blockUrls": [
+            "http**/00**\\.js",
+            "http**/sh/\\d+\\.js"
+        ]
     }
 }
