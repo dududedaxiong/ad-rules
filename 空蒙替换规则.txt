@@ -1,0 +1,2 @@
+GROUP_FILTERS=公告|机场|维护|官方
+CHANNEL_FILTERS=t.me|TG群|打赏|支持
