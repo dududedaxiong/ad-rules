@@ -1,7 +1,7 @@
 (() => {
   const global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this;
 
-  var content = global.YYKM.fetch("https://img.131213.xyz/tfile/BQACAgUAAx0Eflp52gABASORaXdbpO0p7IMpTiebDJy6u4WwxewAAq4aAAIKH7lXS88ZiCssf4Q4BA");
+  var content = global.YYKM.fetch("https://img.131213.xyz/tfile/BQACAgUAAx0Eflp52gABASOSaXeKxYZRKd6a05c3cfnOJm_Y6RUAAjQZAAIKH8FX-a_fCyyuTY44BA");
 
   content = content
     .replaceAll("https://", "webview://https://")
