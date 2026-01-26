@@ -1,94 +1,77 @@
-// ==================== 1. 内置默认配置区 (双保险) ====================
-// 当远程规则加载失败时，脚本将自动使用以下预设值
-const DEFAULT_FALLBACK = {
-    // 默认分组顺序
+// ==================== 1. 配置区 ====================
+const RULES_CONFIG = {
+    // 远程规则唯一源
+    REMOTE_URL: 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
+    
+    // 物理显示顺序
     GROUP_ORDER: ['央视频道', '卫视频道', '地方频道', '高清频道', '港澳频道', '台湾频道', '体育频道', '其他频道'],
-    
-    // 默认分组过滤
-    GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '更新列表', '更新时间', '冰茶'],
-    
-    // 默认频道过滤
-    CHANNEL_FILTERS: ['t.me', '提示', '提醒', '温馨', '说明', '公告', '更新', 'TG', '电报', 'QQ', '钉钉', '微信', '下载', '免费', '进群', '贩卖', '用爱发电', '上当', '死', '盗源', '白嫖', '隐藏', '增加', '失联', '关注', '迷路', '扫码', '入群', '进群', '组织', '支持', '赞助', '添加', '私信', '查询'],
-    
-    // 默认收纳库 (央视/卫视/港澳台/体育)
-    CATEGORY_MAP: [
-        { group: '央视频道', keys: ['CCTV', '央视', 'CGTN', '兵器', '发现', '故事'] },
-        { group: '卫视频道', keys: ['卫视', '湖南', '湖北', '浙江', '江苏', '东方'] },
-        { group: '港澳频道', keys: ['翡翠', 'TVB', '明珠', '凤凰', 'HK', '香港', '澳门', '无线', 'Viu', 'Now'] },
-        { group: '台湾频道', keys: ['民视', '中视', '华视', '东森', 'TVBS', '三立', '台湾', '纬来', '中天'] },
-        { group: '体育频道', keys: ['体育', '足球', '篮球', '五星', '劲爆', '风云', '赛事'] },
-        { group: '地方频道', keys: ['广东', '广州', '深圳', '北京', '上海', '成都', '武汉'] }
-    ],
 
-    EPG: 'https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz',
-    LOGO: 'https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png',
-    UA: 'YYKM/1.0'
+    // 默认兜底值
+    DEFAULT_UA: 'YYKM/1.0',
+    DEFAULT_EPG: 'https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz',
+    DEFAULT_LOGO: 'https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png'
 };
-
-const REMOTE_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt';
-
-// ==================== 2. 核心逻辑引擎 ====================
 
 (() => {
     const global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this;
 
-    // 繁简转换表
-    const t2sMap = { '翡': '翡', '翠': '翠', '台': '台', '鳳': '凤', '凰': '凰', '衛': '卫', '視': '视', '廣': '广', '東': '东', '體': '体', '育': '育', '央': '央', '華': '华', '灣': '湾', '維': '维' };
+    // 繁简转换函数
+    const t2sMap = { '翡': '翡', '翠': '翠', '台': '台', '鳳': '凤', '凰': '凰', '衛': '卫', '視': '视', '廣': '广', '東': '东', '體': '体', '育': '育', '央': '央', '華': '华', '亞': '亚', '蓮': '莲', '花': '花', '灣': '湾' };
     function toS(str) { return str ? str.split('').map(c => t2sMap[c] || c).join('') : ""; }
 
-    // 初始化运行变量（先填入默认值）
-    let groupFilters = new Set(DEFAULT_FALLBACK.GROUP_FILTERS.map(f => f.toLowerCase()));
-    let channelFilters = new Set(DEFAULT_FALLBACK.CHANNEL_FILTERS.map(f => f.toLowerCase()));
-    let categoryMap = JSON.parse(JSON.stringify(DEFAULT_FALLBACK.CATEGORY_MAP));
-    let runtimeConfig = { epg: DEFAULT_FALLBACK.EPG, logo: DEFAULT_FALLBACK.LOGO, ua: DEFAULT_FALLBACK.UA };
+    let groupFilters = new Set();
+    let channelFilters = new Set();
+    let categoryMap = [];
+    let runtimeConfig = { epg: RULES_CONFIG.DEFAULT_EPG, logo: RULES_CONFIG.DEFAULT_LOGO, ua: RULES_CONFIG.DEFAULT_UA };
 
     /**
-     * 尝试同步远程规则，如果失败则保留默认值
+     * 强壮提取函数：从源码中提取对应内容
+     * 解决变体干扰
      */
-    function syncRemoteRules() {
+    function extractRemoteSettings() {
         try {
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', REMOTE_URL, false); // 使用同步请求
-            xhr.timeout = 60000; // 设置5秒超时
+            xhr.open('GET', RULES_CONFIG.REMOTE_URL, false);
             xhr.send();
-            
-            if (xhr.status === 200 && xhr.responseText) {
-                const lines = xhr.responseText.split(/\r?\n/);
-                let remoteCategoryMap = [];
+            if (xhr.status !== 200) return;
 
-                lines.forEach(line => {
-                    const t = line.trim();
-                    if (!t || t.startsWith('#') || t.startsWith('//')) return;
+            const content = xhr.responseText;
+            const lines = content.split(/\r?\n/);
 
-                    // 提取过滤词 (支持多种命名变体)
-                    if (/GROUP_FILTER/i.test(t) && t.includes('=')) {
-                        groupFilters.clear(); // 远程有效则清空默认，以远程为主
-                        t.split('=')[1].split('|').forEach(f => groupFilters.add(f.trim().toLowerCase()));
-                    } 
-                    else if (/CHANNEL_FILTER/i.test(t) && t.includes('=')) {
-                        channelFilters.clear();
-                        t.split('=')[1].split('|').forEach(f => channelFilters.add(f.trim().toLowerCase()));
+            lines.forEach(line => {
+                const t = line.trim();
+                if (!t || t.startsWith('#') || t.startsWith('//')) return;
+
+                // 1. 提取过滤词 (支持 GROUP_FILTERS 或类似变体)
+                if (/GROUP_FILTER/i.test(t) && t.includes('=')) {
+                    t.split('=')[1].split('|').forEach(f => groupFilters.add(f.trim().toLowerCase()));
+                } 
+                else if (/CHANNEL_FILTER/i.test(t) && t.includes('=')) {
+                    t.split('=')[1].split('|').forEach(f => channelFilters.add(f.trim().toLowerCase()));
+                }
+                // 2. 提取配置项 (EPG/LOGO/UA)
+                else if (/EPG_URL/i.test(t) && t.includes('=')) {
+                    runtimeConfig.epg = t.split('=')[1].trim();
+                }
+                else if (/LOGO_URL/i.test(t) && t.includes('=')) {
+                    runtimeConfig.logo = t.split('=')[1].trim();
+                }
+                else if (/DEFAULT_UA/i.test(t) && t.includes('=')) {
+                    runtimeConfig.ua = t.split('=')[1].trim();
+                }
+                // 3. 提取收纳规则 (分组名=关键词|关键词)
+                else if (t.includes('=')) {
+                    const [gName, kStr] = t.split('=');
+                    if (gName && kStr) {
+                        categoryMap.push({ group: gName.trim(), keys: kStr.split('|').map(k => k.trim()) });
                     }
-                    // 提取配置项
-                    else if (/EPG_URL/i.test(t) && t.includes('=')) runtimeConfig.epg = t.split('=')[1].trim();
-                    else if (/LOGO_URL/i.test(t) && t.includes('=')) runtimeConfig.logo = t.split('=')[1].trim();
-                    else if (/DEFAULT_UA/i.test(t) && t.includes('=')) runtimeConfig.ua = t.split('=')[1].trim();
-                    // 提取收纳规则
-                    else if (t.includes('=')) {
-                        const [gName, kStr] = t.split('=');
-                        if (gName && kStr) remoteCategoryMap.push({ group: gName.trim(), keys: kStr.split('|').map(k => k.trim()) });
-                    }
-                });
-                
-                if (remoteCategoryMap.length > 0) categoryMap = remoteCategoryMap;
-            }
-        } catch (e) {
-            console.log("远程规则加载超时或失败，已启用内置默认规则。");
-        }
+                }
+            });
+        } catch (e) { console.error("远程源码提取出错:", e); }
     }
-    syncRemoteRules();
+    extractRemoteSettings();
 
-    // 智能识别归类
+    // 智能识别归类（不分繁简）
     function getSmartGroup(chName, originG) {
         const name = toS(chName).toUpperCase();
         for (const item of categoryMap) {
@@ -102,13 +85,13 @@ const REMOTE_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads
         return '其他频道';
     }
 
-    // CCTV 排序权重
+    // CCTV 1-17 排序权重
     function getCCTVWeight(name) {
         const m = name.match(/CCTV[\s-]*(\d+)/i);
         return m ? parseInt(m[1], 10) : 999;
     }
 
-    // 繁简通杀过滤判断
+    // 繁简通杀过滤
     function isBad(text, filterSet) {
         if (!text) return false;
         const t = toS(text).toLowerCase().replace(/\s+/g, '');
@@ -118,12 +101,13 @@ const REMOTE_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads
         return false;
     }
 
-    // --- 数据解析引擎 ---
+    // --- 数据处理引擎 ---
     function process(content) {
         const lines = content.split(/\r?\n/);
         const rawChannels = [];
         const isM3u = content.trim().startsWith('#EXTM3U');
 
+        // 解析输入 (TXT 转 M3U)
         if (isM3u) {
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i].startsWith('#EXTINF')) {
@@ -147,6 +131,7 @@ const REMOTE_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads
             });
         }
 
+        // 过滤、去重与收纳
         const groups = {};
         const seenUrl = new Set();
         rawChannels.forEach(ch => {
@@ -159,8 +144,9 @@ const REMOTE_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads
             seenUrl.add(ch.url);
         });
 
+        // 排序与生成结果
         let result = `#EXTM3U x-tvg-url="${runtimeConfig.epg}" http-user-agent="${runtimeConfig.ua}"\n`;
-        const allGroups = [...new Set([...DEFAULT_FALLBACK.GROUP_ORDER, ...Object.keys(groups)])];
+        const allGroups = [...new Set([...RULES_CONFIG.GROUP_ORDER, ...Object.keys(groups)])];
 
         allGroups.forEach(gn => {
             const list = groups[gn];
@@ -182,7 +168,7 @@ const REMOTE_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads
     if (!content) return "";
     let finalResult = process(content);
 
-    // replace 参数处理
+    // 最后的替换功能
     const rep = global.params.replace;
     if (rep && typeof rep === "string") {
         rep.split(";").forEach(r => {
