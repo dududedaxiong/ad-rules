@@ -341,15 +341,16 @@ const RULES_CONFIG = {
     return result.join('\n');
   }
 
-  // 流程：加载规则 -> 获取源 -> 判定源格式 -> 转换补全 -> 过滤排序 -> 输出
+  // 流程：加载规则 -> 获取源 -> 判定源格式 -> 条件处理
   const format = detectFormat(content);
-  
+
   if (format === 'TXT') {
-    // TXT格式先过滤排序，然后转换为M3U
-    content = processTxtFormat(content);
-    content = convertTxtToM3u(content);
+    // TXT格式：过滤 -> 排序 -> 转M3U -> 直接输出
+    content = processTxtFormat(content);  // 过滤排序
+    content = convertTxtToM3u(content);   // 转M3U
+    // 直接返回，跳过后续处理
   } else {
-    // M3U格式直接补全
+    // M3U格式：进行过滤、补全、排序
     content = processM3uFormat(content);
   }
 
