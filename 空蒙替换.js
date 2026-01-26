@@ -13,7 +13,7 @@ const RULES_CONFIG = {
   // 补全配置项
   EPG_URL: 'https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz',
   LOGO_URL_TEMPLATE: 'https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png',
-  PLAYBACK_MODE: 'append',
+  PLAYBACK_MODE: '',
   CATCHUP_SOURCE: '',
   DEFAULT_UA: 'okHttp/Mod-1.5.0.0',
   
