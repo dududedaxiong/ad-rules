@@ -7,8 +7,7 @@ const RULES_CONFIG = {
   SPECIAL_CHANNEL_MAPPING: {},
   EPG_URL: '',
   LOGO_URL_TEMPLATE: 'https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png',
-  CATCHUP_MODE: 'append',
-  CATCHUP_SOURCE: '?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}',
+  PLAYBACK_MODE: '',
   DEFAULT_UA: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
 };
 // ==================== 规则配置区域结束 ====================
@@ -20,8 +19,7 @@ const RULES_CONFIG = {
   let channelFilters = RULES_CONFIG.DEFAULT_CHANNEL_FILTERS;
   let epgUrl = RULES_CONFIG.EPG_URL;
   let logoUrlTemplate = RULES_CONFIG.LOGO_URL_TEMPLATE;
-  let catchupMode = RULES_CONFIG.CATCHUP_MODE;
-  let catchupSource = RULES_CONFIG.CATCHUP_SOURCE;
+  let playbackMode = RULES_CONFIG.PLAYBACK_MODE;
   let defaultUA = RULES_CONFIG.DEFAULT_UA;
 
   // 加载外部规则(同步方式)
@@ -39,16 +37,14 @@ const RULES_CONFIG = {
 
           if (trimmed.startsWith('GROUP_FILTERS=')) {
             groupFilters = trimmed.replace('GROUP_FILTERS=', '').split('|').map(f => f.trim()).filter(f => f);
-           else if (trimmed.startsWith('CHANNEL_FILTERS=')) {
+          } else if (trimmed.startsWith('CHANNEL_FILTERS=')) {
             channelFilters = trimmed.replace('CHANNEL_FILTERS=', '').split('|').map(f => f.trim()).filter(f => f);
           } else if (trimmed.startsWith('EPG_URL=')) {
             epgUrl = trimmed.replace('EPG_URL=', '').trim();
           } else if (trimmed.startsWith('LOGO_URL_TEMPLATE=')) {
             logoUrlTemplate = trimmed.replace('LOGO_URL_TEMPLATE=', '').trim();
-          } else if (trimmed.startsWith('CATCHUP_MODE=')) {
-            catchupMode = trimmed.replace('CATCHUP_MODE=', '').trim();
-          } else if (trimmed.startsWith('CATCHUP_SOURCE=')) {
-            catchupSource = trimmed.replace('CATCHUP_SOURCE=', '').trim();
+          } else if (trimmed.startsWith('PLAYBACK_MODE=')) {
+            playbackMode = trimmed.replace('PLAYBACK_MODE=', '').trim();
           } else if (trimmed.startsWith('DEFAULT_UA=')) {
             defaultUA = trimmed.replace('DEFAULT_UA=', '').trim();
           }
@@ -74,8 +70,7 @@ const RULES_CONFIG = {
     channelFilters = RULES_CONFIG.DEFAULT_CHANNEL_FILTERS;
     epgUrl = RULES_CONFIG.EPG_URL;
     logoUrlTemplate = RULES_CONFIG.LOGO_URL_TEMPLATE;
-    catchupMode = RULES_CONFIG.CATCHUP_MODE;
-    catchupSource = RULES_CONFIG.CATCHUP_SOURCE;
+    playbackMode = RULES_CONFIG.PLAYBACK_MODE;
     defaultUA = RULES_CONFIG.DEFAULT_UA;
   }
 
@@ -114,6 +109,7 @@ const RULES_CONFIG = {
     return match ? parseInt(match[1], 10) : Infinity;
   }
 
+  // 生成台标URL
   function generateLogoUrl(channelName) {
     if (!logoUrlTemplate) return '';
     return logoUrlTemplate.replace('{channel_name}', encodeURIComponent(channelName));
@@ -206,50 +202,6 @@ const RULES_CONFIG = {
     return content.trim().startsWith('#EXTM3U') ? 'M3U' : 'TXT';
   }
 
-  // TXT格式转M3U格式
-  function convertTxtToM3u(txtContent) {
-    const lines = txtContent.split('\n');
-    const result = [];
-
-    // 添加M3U头部
-    result.push('#EXTM3U x-tvg-url="' + epgUrl + '" x-tvg-ua="' + defaultUA + '"');
-
-    let currentGroup = '';
-
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      if (!trimmedLine) continue;
-
-      if (trimmedLine.match(/^.+,#genre#$/)) {
-        currentGroup = trimmedLine.split(',')[0].trim();
-      } else if (trimmedLine.match(/^.+,.+$/)) {
-        const parts = trimmedLine.split(',');
-        const channelName = parts[0].trim();
-        const channelUrl = parts[1].trim();
-
-        const transformed = transformChannel({ name: channelName, url: channelUrl });
-
-        if (transformed) {
-          const groupName = currentGroup || '其他';
-          const logoUrl = generateLogoUrl(transformed.name);
-          
-          let extinf = `#EXTINF:-1 tvg-chno="${extractNumber(transformed.name)}" tvg-id="${transformed.name}" tvg-name="${transformed.name}" tvg-logo="${logoUrl}" group-title="${groupName}"`;
-          
-          if (catchupMode && catchupSource) {
-            extinf += ` catchup="${catchupMode}" catchup-source="${catchupSource}"`;
-          }
-          
-          extinf += `,${transformed.name}`;
-          
-          result.push(extinf);
-          result.push(transformed.url);
-        
-      }
-    }
-
-    return result.join('\n');
-  }
-
   function processTxtFormat(content) {
     const lines = content.split('\n');
     const seen = new Set();
@@ -289,8 +241,8 @@ const RULES_CONFIG = {
     const seen = new Set();
     const result = [];
     let skipNextUrl = false;
+    let lastExtinf = '';
     let pendingExtinf = null;
-    let existingEpgCount = 0;
 
     for (const line of lines) {
       const trimmedLine = line.trim();
@@ -298,21 +250,22 @@ const RULES_CONFIG = {
       if (!trimmedLine) continue;
 
       if (trimmedLine.startsWith('#EXTM3U')) {
-        result.push(trimmedLine);
-        
-        // 检查原M3U是否有EPG地址
-        if (trimmedLine.includes('x-tvg-url=')) {
-          existingEpgCount++;
+        // M3U头部添加 EPG 和其他属性
+        let extm3uLine = '#EXTM3U';
+        if (epgUrl) {
+          extm3uLine += ` x-tvg-url="${epgUrl}"`;
         }
-        
-        // 如果外部规则有EPG且原M3U也有，则在下一行添加外部规则的EPG
+        if (defaultUA) {
+          extm3uLine += ` x-tvg-ua="${defaultUA}"`;
+        }
+        result.push(extm3uLine);
         continue;
       }
 
       if (trimmedLine.startsWith('#EXTINF')) {
         if (pendingExtinf !== null && !skipNextUrl) {
-          // 前一个频道没有链接，不添加
-        
+          // 前一个频道没有链接，不添加到结果中
+        }
 
         skipNextUrl = shouldFilter(trimmedLine);
 
@@ -321,44 +274,40 @@ const RULES_CONFIG = {
           const transformed = transformChannel({ name: displayName, url: null });
 
           if (transformed) {
+            // 在 EXTINF 行中添加台标信息
             let extinf = trimmedLine.replace(displayName, transformed.name);
             
-            // 添加回看参数
-            if (catchupMode && catchupSource && !extinf.includes('catchup=')) {
-              const insertPos = extinf.lastIndexOf('#EXTINF:');
-              const endPos = extinf.indexOf(',', insertPos);
-              extinf = extinf.slice(0, endPos) + ` catchup="${catchupMode}" catchup-source="${catchupSource}"` + extinf.slice(endPos);
+            // 如果原行没有 tvg-logo，则添加台标
+            if (!extinf.includes('tvg-logo=') && logoUrlTemplate) {
+              const logoUrl = generateLogoUrl(transformed.name);
+              extinf = extinf.replace('#EXTINF:', `#EXTINF:-1 tvg-logo="${logoUrl}"`);
             }
-            
+
             pendingExtinf = extinf;
-           else {
+          } else {
             skipNextUrl = true;
           }
         }
       } else if (!trimmedLine.startsWith('#') && trimmedLine) {
+        // 这是一个URL行
         if (!skipNextUrl && pendingExtinf !== null) {
           if (!seen.has(pendingExtinf)) {
             seen.add(pendingExtinf);
             result.push(pendingExtinf);
-          
+          }
 
           if (!seen.has(trimmedLine)) {
             seen.add(trimmedLine);
             result.push(trimmedLine);
-          
+          }
 
           pendingExtinf = null;
         } else if (skipNextUrl) {
           pendingExtinf = null;
-        
+        }
 
         skipNextUrl = false;
       }
-    }
-
-    // 如果原M3U有EPG且外部规则也有EPG，在结果后添加外部规则的EPG行
-    if (existingEpgCount > 0 && epgUrl) {
-      result.push(`#EXTM3U x-tvg-url="${epgUrl}"`);
     }
 
     pendingExtinf = null;
@@ -367,14 +316,7 @@ const RULES_CONFIG = {
   }
 
   const format = detectFormat(content);
-  
-  if (format === 'M3U') {
-    content = processM3uFormat(content);
-  } else {
-    // TXT格式：先排序，再转M3U格式
-    const sortedTxt = processTxtFormat(content);
-    content = convertTxtToM3u(sortedTxt);
-  }
+  content = format === 'M3U' ? processM3uFormat(content) : processTxtFormat(content);
 
   const replaceParam = global.params.replace;
   if (typeof replaceParam === "string" && replaceParam.length > 0) {
