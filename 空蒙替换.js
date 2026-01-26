@@ -1,191 +1,147 @@
 // ==================== 规则配置区域 ====================
 const RULES_CONFIG = {
   EXTERNAL_RULES_URL: 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
-  // 分组过滤词 (全模糊匹配)
-  DEFAULT_GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '冰茶'],
-  // 频道过滤词 (全模糊匹配)
-  DEFAULT_CHANNEL_FILTERS: ['t.me', 'TG群', '提醒', '不正确', '更新', '下载', '维护', '打赏', '支持', '好用', '提示', '温馨', 'HTTP', '密码不正确', '已隐藏'],
-  CCTV_CHANNEL_KEYWORDS: ['cctv', 'cetv', 'cgtn'],
-  // 强制排序：定义分组的展示顺序
-  GROUP_ORDER_WEIGHT: { 'CCTV': 1, '央视': 1, '卫视': 2, '其他': 3 }
+  // 本地保底过滤逻辑 (全模糊匹配)
+  GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '最近更新', '冰茶'],
+  CHANNEL_FILTERS: ['测试', '提示', '提醒', '温馨', '说明', '公告', '更新', 'TG', '电报', 'QQ', '微信', '下载', '密码不正确', '已隐藏'],
+  
+  // 分组大类排序权重 (参考 channelItemListProcessJs)
+  GROUP_NAME_SORT: ['央视频道', '卫视频道', '地方频道', '高清频道', '港澳频道', '台湾频道', '其他频道', '有线频道', '体育频道']
 };
 // ==================== 规则配置区域结束 ====================
 
 (() => {
-const global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this;
+  const global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this;
 
-let groupFilters = new Set(RULES_CONFIG.DEFAULT_GROUP_FILTERS.map(f => f.toLowerCase()));
-let channelFilters = new Set(RULES_CONFIG.DEFAULT_CHANNEL_FILTERS.map(f => f.toLowerCase()));
-
-// 1. 同步加载外部规则
-function loadRules() {
-  try {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', RULES_CONFIG.EXTERNAL_RULES_URL, false);
-    xhr.send();
-    if (xhr.status === 200 && xhr.responseText) {
-      xhr.responseText.split('\n').forEach(line => {
-        const t = line.trim();
-        if (t.startsWith('GROUP_FILTERS=')) {
-          t.replace('GROUP_FILTERS=', '').split('|').forEach(f => { if(f.trim()) groupFilters.add(f.trim().toLowerCase()); });
-        } else if (t.startsWith('CHANNEL_FILTERS=')) {
-          t.replace('CHANNEL_FILTERS=', '').split('|').forEach(f => { if(f.trim()) channelFilters.add(f.trim().toLowerCase()); });
-        }
-      });
-    }
-  } catch (e) {}
-}
-loadRules();
-
-// 2. 极致模糊匹配判定
-function isMatch(text, filterSet) {
-  if (!text) return false;
-  const target = text.toLowerCase().replace(/\s+/g, '');
-  for (let f of filterSet) {
-    if (target.includes(f.replace(/\s+/g, ''))) return true;
+  // 1. 提取并规范化 CCTV 数字权重 (核心修复)
+  function getCCTVNumber(name) {
+    const match = name.match(/CCTV[\s-]*(\d+)/i); // 提取如 CCTV-4 中的 "4"
+    return match ? parseInt(match[1], 10) : null;
   }
-  return false;
-}
 
-// 3. 频道名称规范化
-function normalizeName(name) {
-  let n = name.trim();
-  const match = n.match(/^(cctv|cetv|cgtn)[\s-]*(\d+)(.*?)$/i);
-  if (match) {
-    const prefix = match[1].toUpperCase();
-    const num = match[2];
-    const suffix = match[3].trim();
-    // 统一格式为 CCTV-4 (带空格或后缀保留)
-    return suffix ? `${prefix}-${num} ${suffix}` : `${prefix}-${num}`;
+  // 2. 极致模糊匹配函数
+  function isBad(text, filters) {
+    if (!text) return false;
+    const target = text.toLowerCase().replace(/\s+/g, '');
+    return filters.some(f => target.includes(f.toLowerCase().replace(/\s+/g, '')));
   }
-  return n;
-}
 
-// 4. 【核心】提取频道权重，解决 CCTV-4 乱序问题
-function getChannelWeight(name) {
-  const n = name.toUpperCase().replace(/\s+/g, '');
-  // 提取 CCTV/CETV/CGTN 后的数字
-  const m = n.match(/(?:CCTV|CETV|CGTN)[\s-]*(\d+)/);
-  if (m) {
-    // 例如 CCTV-4 返回权重 4，CCTV-13 返回 13
-    return parseInt(m[1], 10);
-  }
-  return 999; // 非数字频道排在后面
-}
+  // 3. 核心排序函数 (参考 channelItemListProcessJs)
+  function sortChannels(channels) {
+    return channels.sort((a, b) => {
+      const numA = getCCTVNumber(a.name);
+      const numB = getCCTVNumber(b.name);
 
-// 5. 全局排序处理
-const globalSort = (lines) => {
-  const grouped = {};
-  const groupOrder = [];
-  let currentGroup = null;
-
-  lines.forEach(line => {
-    if (line.match(/^.+,#genre#$/)) {
-      currentGroup = line.split(',')[0].trim();
-      if (!grouped[currentGroup]) {
-        grouped[currentGroup] = [];
-        groupOrder.push(currentGroup);
+      // 第一优先级：按台号数字排 (解决 CCTV-4 与 CCTV-13 的顺序)
+      if (numA !== null && numB !== null) {
+        if (numA !== numB) return numA - numB;
+        // 第二优先级：数字相同时，按中文自然顺序排 (解决 CCTV-4 不同变体)
+        return a.name.localeCompare(b.name, 'zh-CN');
       }
-    } else if (line.includes(',') && currentGroup) {
-      grouped[currentGroup].push(line);
-    }
-  });
+      if (numA !== null) return -1;
+      if (numB !== null) return 1;
 
-  // 组内排序
-  for (const g in grouped) {
-    grouped[g].sort((a, b) => {
-      const nameA = a.split(',')[0];
-      const nameB = b.split(',')[0];
-      const weightA = getChannelWeight(nameA);
-      const weightB = getChannelWeight(nameB);
-      
-      if (weightA !== weightB) return weightA - weightB; // 首先按台号数字排
-      return nameA.localeCompare(nameB, 'zh-CN'); // 数字相同时按后缀字母/中文排
+      // 普通频道使用拼音/中文自然排序
+      return a.name.localeCompare(b.name, 'zh-CN');
     });
   }
 
-  // 分组大类排序 (央视 > 卫视 > 其他)
-  const result = [];
-  const getGroupTypeWeight = (gn) => {
-    const upper = gn.toUpperCase();
-    if (upper.includes('CCTV') || upper.includes('央视')) return 1;
-    if (gn.includes('卫视')) return 2;
-    return 3;
-  };
+  // 4. M3U 格式解析与过滤
+  function processM3U(content) {
+    const lines = content.split('\n');
+    const groups = {};
+    const seen = new Set();
 
-  groupOrder.sort((a, b) => getGroupTypeWeight(a) - getGroupTypeWeight(b));
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('#EXTINF')) {
+        const gMatch = line.match(/group-title="([^"]+)"/i);
+        const groupName = gMatch ? gMatch[1] : "其他频道";
+        const displayName = line.split(',').pop();
+        const url = lines[i+1] ? lines[i+1].trim() : "";
 
-  groupOrder.forEach(gn => {
-    result.push(`${gn},#genre#`);
-    result.push(...grouped[gn]);
-  });
-  return result;
-};
+        // 过滤逻辑：分组名或频道名包含过滤词
+        if (isBad(groupName, RULES_CONFIG.GROUP_FILTERS) || isBad(displayName, RULES_CONFIG.CHANNEL_FILTERS)) {
+          i++; continue;
+        }
 
-// 6. M3U 逻辑 (带分组识别)
-function processM3u(content) {
-  const lines = content.split('\n');
-  const result = ['#EXTM3U'];
-  const seen = new Set();
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (line.startsWith('#EXTINF')) {
-      const gMatch = line.match(/group-title="([^"]+)"/i);
-      const groupName = gMatch ? gMatch[1] : "其他";
-      const displayName = line.split(',').pop();
-
-      if (isMatch(groupName, groupFilters) || isMatch(displayName, channelFilters)) {
-        i++; continue;
-      }
-
-      const url = lines[i+1] ? lines[i+1].trim() : "";
-      if (url && url.startsWith('http') && !seen.has(url)) {
-        const newName = normalizeName(displayName);
-        result.push(line.replace(displayName, newName), url);
-        seen.add(url);
-        i++;
+        if (url && url.startsWith('http') && !seen.has(url)) {
+          if (!groups[groupName]) groups[groupName] = [];
+          groups[groupName].push({ name: displayName, inf: line, url: url });
+          seen.add(url);
+          i++;
+        }
       }
     }
+
+    // 执行大类排序并生成内容
+    let result = '#EXTM3U\n';
+    const sortedGroupNames = Object.keys(groups).sort((a, b) => {
+      const wA = RULES_CONFIG.GROUP_ORDER_WEIGHT?.indexOf(a) ?? 99;
+      const wB = RULES_CONFIG.GROUP_ORDER_WEIGHT?.indexOf(b) ?? 99;
+      return wA - wB || a.localeCompare(b, 'zh-CN');
+    });
+
+    sortedGroupNames.forEach(gn => {
+      const sortedList = (gn.includes('央视') || gn.includes('CCTV')) ? sortChannels(groups[gn]) : groups[gn].sort((a,b) => a.name.localeCompare(b.name, 'zh-CN'));
+      sortedList.forEach(ch => {
+        result += `${ch.inf}\n${ch.url}\n`;
+      });
+    });
+    return result;
   }
-  return result.join('\n');
-}
 
-// 7. TXT 逻辑
-function processTxt(content) {
-  const lines = content.split('\n');
-  const resLines = [];
-  let skipG = false;
-  lines.forEach(l => {
-    const t = l.trim();
-    if (!t) return;
-    if (t.includes(',#genre#')) {
-      skipG = isMatch(t.split(',')[0], groupFilters);
-      if (!skipG) resLines.push(t);
-    } else if (t.includes(',') && !skipG) {
-      const [name, url] = t.split(',');
-      if (!isMatch(name, channelFilters)) {
-        resLines.push(`${normalizeName(name)},${url}`);
+  // 5. TXT 格式解析与过滤
+  function processTXT(content) {
+    const lines = content.split('\n');
+    const groups = {};
+    let curG = "其他频道";
+    let skipG = false;
+
+    lines.forEach(line => {
+      const t = line.trim();
+      if (!t) return;
+      if (t.includes(',#genre#')) {
+        const gn = t.split(',')[0].trim();
+        skipG = isBad(gn, RULES_CONFIG.GROUP_FILTERS);
+        if (!skipG) {
+          curG = gn;
+          if (!groups[curG]) groups[curG] = [];
+        }
+      } else if (t.includes(',') && !skipG) {
+        const [name, url] = t.split(',');
+        if (url && url.startsWith('http') && !isBad(name, RULES_CONFIG.CHANNEL_FILTERS)) {
+          groups[curG].push({ name, url });
+        }
       }
-    }
-  });
-  return globalSort(resLines).join('\n');
-}
+    });
 
-// --- 主入口 ---
-let content = global.YYKM.fetch(global.params.url);
-if (!content) return "";
+    let result = '';
+    RULES_CONFIG.GROUP_NAME_SORT.forEach(gn => {
+      if (groups[gn] && groups[gn].length > 0) {
+        result += `${gn},#genre#\n`;
+        const sortedList = (gn.includes('央视') || gn.includes('CCTV')) ? sortChannels(groups[gn]) : groups[gn].sort((a,b) => a.name.localeCompare(b.name, 'zh-CN'));
+        sortedList.forEach(ch => result += `${ch.name},${ch.url}\n`);
+      }
+    });
+    return result;
+  }
 
-const format = content.trim().startsWith('#EXTM3U') ? 'M3U' : 'TXT';
-content = (format === 'M3U') ? processM3u(content) : processTxt(content);
+  // --- 主逻辑 ---
+  let content = global.YYKM.fetch(global.params.url);
+  if (!content) return "";
 
-// replace 参数替换
-const rep = global.params.replace;
-if (typeof rep === "string") {
-  rep.split(";").forEach(r => {
-    const [f, t] = r.split("->");
-    if (f && t) content = content.replaceAll(f, t);
-  });
-}
+  const isM3u = content.trim().startsWith('#EXTM3U');
+  content = isM3u ? processM3U(content) : processTXT(content);
 
-return content;
+  // 最后执行 replace 替换
+  const rep = global.params.replace;
+  if (rep) {
+    rep.split(";").forEach(r => {
+      const [f, t] = r.split("->");
+      if (f && t) content = content.replaceAll(f, t);
+    });
+  }
+
+  return content;
 })();
