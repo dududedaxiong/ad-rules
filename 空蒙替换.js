@@ -6,16 +6,16 @@ typeof globalThis !== "undefined"
 ? window
 : this;  
 
-// ========== 配置区域 ==========
-// 内置过滤规则
+// ========== 配置区域（方便维护）==========
+const EXTERNAL_RULES_URL = 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt';
+
 const DEFAULT_GROUP_FILTERS = ['公告', '说明', '温馨', 'Information', '机场', 'TG频道'];
 const DEFAULT_CHANNEL_FILTERS = ['t.me', 'TG群', '提醒', '不正确', '更新', '下载', '维护', '打赏', '支持', '好用', '提示', '温馨', '免费订阅', 'HTTP'];
 
 const CCTV_CHANNEL_KEYWORDS = ['cctv', 'cetv', 'cgtn'];
+const SPECIAL_CHANNEL_MAPPING = {};
 
 // ========== 配置区域结束 ==========
-
-let content = global.YYKM.fetch(global.params.url);
 
 // 规范化CCTV频道名称
 function normalizeCCTVName(name) {  
@@ -35,11 +35,38 @@ function includesAnyKeyword(name, keywords) {
     return keywords.some(keyword => name.toLowerCase().includes(keyword));
 }
 
-// 检查是否应该过滤
-function shouldFilter(text) {
-  return DEFAULT_GROUP_FILTERS.some(filter => text.includes(filter)) || 
-         DEFAULT_CHANNEL_FILTERS.some(filter => text.includes(filter));
-}
+// 排序CCTV频道
+const sortCCTVChannels = (channels) => {  
+    return channels.sort((a, b) => {  
+        const nameA = a.name;  
+        const nameB = b.name;  
+  
+        const extractNum = (name) => {  
+            const match = name.match(/CCTV[\s-]*(\d+)/i);  
+            return match ? parseInt(match[1], 10) : null;  
+        };  
+  
+        const numA = extractNum(nameA);  
+        const numB = extractNum(nameB);  
+  
+        if (numA !== null && numB !== null) {  
+            if (numA !== numB) return numA - numB;  
+            return nameA.localeCompare(nameB, 'zh-CN');  
+        } else if (numA !== null) return -1;  
+        else if (numB !== null) return 1;  
+  
+        const restA = nameA.replace(/^CCTV[\s-]*\d*/i, '').trim();  
+        const restB = nameB.replace(/^CCTV[\s-]*\d*/i, '').trim();  
+  
+        const isEnglishA = /^[A-Za-z]/.test(restA);  
+        const isEnglishB = /^[A-Za-z]/.test(restB);  
+  
+        if (isEnglishA && !isEnglishB) return -1;  
+        if (!isEnglishA && isEnglishB) return 1;  
+  
+        return nameA.localeCompare(nameB, 'zh-CN');  
+    });  
+};
 
 // 修复嵌入URL的名称
 function fixNameWithEmbeddedUrl(channel) {
@@ -52,11 +79,21 @@ function fixNameWithEmbeddedUrl(channel) {
     }
 }
 
-// 转换频道信息（规范化CCTV名称）
+// 检查是否应该过滤频道
+function shouldFilterChannel(channel) {
+    const name = typeof channel === 'string' ? channel : channel.name;
+    return DEFAULT_CHANNEL_FILTERS.some(filter => name.includes(filter));
+}
+
+// 转换频道信息
 const transformChannel = (channel) => {  
     fixNameWithEmbeddedUrl(channel);  
   
-    if (shouldFilter(channel)) return undefined;  
+    if (shouldFilterChannel(channel)) return undefined;  
+  
+    if (SPECIAL_CHANNEL_MAPPING[channel.name]) {  
+        return { ...SPECIAL_CHANNEL_MAPPING[channel.name], url: channel.url || null };  
+    }  
   
     let newName = channel.name.trim();  
   
@@ -71,28 +108,33 @@ const transformChannel = (channel) => {
     };
 };
 
-// 对频道进行排序
-function sortChannels(channels) {
-    return channels.sort((a, b) => {
-        const isCCTVa = /^CCTV|^CETV|^CGTN/i.test(a.name);
-        const isCCTVb = /^CCTV|^CETV|^CGTN/i.test(b.name);
-        
-        // CCTV频道优先
-        if (isCCTVa && !isCCTVb) return -1;
-        if (!isCCTVa && isCCTVb) return 1;
-        
-        // 都是CCTV频道，按数字排序
-        if (isCCTVa && isCCTVb) {
-            const numA = parseInt(a.name.match(/\d+/)?.[0] || 0);
-            const numB = parseInt(b.name.match(/\d+/)?.[0] || 0);
-            if (numA !== numB) return numA - numB;
-            // 数字相同，按后缀排序
-            return a.name.localeCompare(b.name, 'zh-CN');
-        }
-        
-        // 都不是CCTV，按中文排序
-        return a.name.localeCompare(b.name, 'zh-CN');
-    });
+// 获取过滤规则
+let groupFilters = DEFAULT_GROUP_FILTERS;
+let channelFilters = DEFAULT_CHANNEL_FILTERS;
+
+try {
+  const externalRules = global.YYKM.fetch(EXTERNAL_RULES_URL);
+  const rulesLines = externalRules.split('\n');
+  
+  for (const line of rulesLines) {
+    const trimmed = line.trim();
+    
+    if (trimmed.startsWith('GROUP_FILTERS=')) {
+      groupFilters = trimmed.replace('GROUP_FILTERS=', '').split('|').map(f => f.trim()).filter(f => f);
+    } else if (trimmed.startsWith('CHANNEL_FILTERS=')) {
+      channelFilters = trimmed.replace('CHANNEL_FILTERS=', '').split('|').map(f => f.trim()).filter(f => f);
+    }
+  }
+} catch (e) {
+  // 使用默认规则
+}
+
+let content = global.YYKM.fetch(global.params.url);
+
+// 检查是否应该过滤
+function shouldFilter(text) {
+  return groupFilters.some(filter => text.includes(filter)) || 
+         channelFilters.some(filter => text.includes(filter));
 }
 
 // 自动检测格式
@@ -103,10 +145,10 @@ function detectFormat(content) {
 // 处理普通格式源
 function processTxtFormat(content) {
   const lines = content.split('\n');
-  const groups = {};
-  let currentGroup = null;
+  const seen = new Set();
+  const result = [];
+  let skipCurrentGroup = false;
   
-  // 先按分组收集数据
   for (const line of lines) {
     const trimmedLine = line.trim();
     
@@ -115,20 +157,20 @@ function processTxtFormat(content) {
     if (trimmedLine.match(/^.+,#genre#$/)) {
       const groupName = trimmedLine.split(',')[0].trim();
       
-      if (shouldFilter(groupName)) {
-        currentGroup = null;
+      skipCurrentGroup = shouldFilter(groupName);
+      
+      if (!skipCurrentGroup) {
+        if (!seen.has(trimmedLine)) {
+          seen.add(trimmedLine);
+          result.push(trimmedLine);
+        }
+      }
+    }
+    else if (trimmedLine.match(/^.+,.+$/)) {
+      if (skipCurrentGroup) {
         continue;
       }
       
-      currentGroup = groupName;
-      if (!groups[currentGroup]) {
-        groups[currentGroup] = {
-          name: currentGroup,
-          channels: []
-        };
-      }
-    
-    else if (trimmedLine.match(/^.+,.+$/) && currentGroup) {
       if (shouldFilter(trimmedLine)) {
         continue;
       }
@@ -140,18 +182,12 @@ function processTxtFormat(content) {
       const transformed = transformChannel({ name: channelName, url: channelUrl });
       
       if (transformed) {
-        groups[currentGroup].channels.push(transformed);
+        const transformedLine = `${transformed.name},${transformed.url}`;
+        if (!seen.has(transformedLine)) {
+          seen.add(transformedLine);
+          result.push(transformedLine);
+        }
       }
-    }
-  }
-  
-  // 对每个分组内的频道进行排序
-  const result = [];
-  for (const groupName in groups) {
-    result.push(`${groupName},#genre#`);
-    const sortedChannels = sortChannels(groups[groupName].channels);
-    for (const channel of sortedChannels) {
-      result.push(`${channel.name},${channel.url}`);
     }
   }
   
@@ -161,12 +197,13 @@ function processTxtFormat(content) {
 // 处理M3U格式源
 function processM3uFormat(content) {
   const lines = content.split('\n');
+  const seen = new Set();
   const result = [];
-  const channels = [];
-  let currentExtinf = '';
+  let skipNextUrl = false;
+  let lastExtinf = '';
   
-  for (let i = 0; i < lines.length; i++) {
-    const trimmedLine = lines[i].trim();
+  for (const line of lines) {
+    const trimmedLine = line.trim();
     
     if (!trimmedLine) continue;
     
@@ -176,36 +213,31 @@ function processM3uFormat(content) {
     }
     
     if (trimmedLine.startsWith('#EXTINF')) {
-      if (shouldFilter(trimmedLine)) {
-        // 跳过这个EXTINF和对应的URL
-        if (i + 1 < lines.length && !lines[i + 1].trim().startsWith('#')) {
-          i++;
+      skipNextUrl = shouldFilter(trimmedLine);
+      
+      if (!skipNextUrl) {
+        const displayName = trimmedLine.split(',').pop();
+        const transformed = transformChannel({ name: displayName, url: null });
+        
+        if (transformed) {
+          lastExtinf = trimmedLine.replace(displayName, transformed.name);
+          if (!seen.has(lastExtinf)) {
+            seen.add(lastExtinf);
+            result.push(lastExtinf);
+          }
+        } else {
+          skipNextUrl = true;
         }
-        continue;
       }
-      
-      const displayName = trimmedLine.split(',').pop();
-      const transformed = transformChannel({ name: displayName, url: null });
-      
-      if (transformed) {
-        const newExtinf = trimmedLine.replace(displayName, transformed.name);
-        channels.push({
-          extinf: newExtinf,
-          name: transformed.name,
-          url: ''
-        });
+    } else if (!trimmedLine.startsWith('#') && trimmedLine) {
+      if (!skipNextUrl) {
+        if (!seen.has(trimmedLine)) {
+          seen.add(trimmedLine);
+          result.push(trimmedLine);
+        }
       }
-     else if (!trimmedLine.startsWith('#') && trimmedLine && channels.length > 0) {
-      channels[channels.length - 1].url = trimmedLine;
+      skipNextUrl = false;
     }
-  }
-  
-  // 对频道排序
-  const sortedChannels = sortChannels(channels);
-  
-  for (const channel of sortedChannels) {
-    result.push(channel.extinf);
-    result.push(channel.url);
   }
   
   return result.join('\n');
