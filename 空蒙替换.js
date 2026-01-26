@@ -1,4 +1,3 @@
-
 (() => {
 const global =
 typeof globalThis !== "undefined"
@@ -50,14 +49,11 @@ if (global.params.channelFilters) {
   channelFilters = global.params.channelFilters.split('|').map(f => f.trim()).filter(f => f);
 }
 
-// 检查是否应该过滤分组
-function shouldFilterGroup(groupName) {
-  return groupFilters.some(filter => groupName.includes(filter));
-}
-
-// 检查是否应该过滤频道
-function shouldFilterChannel(channelLine) {
-  return channelFilters.some(filter => channelLine.includes(filter));
+// 检查是否应该过滤
+function shouldFilter(text) {
+  // 检查分组和频道过滤
+  return groupFilters.some(filter => text.includes(filter)) || 
+         channelFilters.some(filter => text.includes(filter));
 }
 
 // 自动检测格式
@@ -75,6 +71,7 @@ function processTxtFormat(content) {
   const seen = new Set();
   const result = [];
   let currentGroup = null;
+  let skipCurrentGroup = false;
   
   for (const line of lines) {
     const trimmedLine = line.trim();
@@ -84,23 +81,22 @@ function processTxtFormat(content) {
     if (trimmedLine.match(/^.+,#genre#$/)) {
       const groupName = trimmedLine.split(',')[0].trim();
       
-      if (shouldFilterGroup(groupName)) {
-        currentGroup = null;
-        continue;
-      }
+      skipCurrentGroup = shouldFilter(groupName);
       
-      currentGroup = groupName;
-      if (!seen.has(trimmedLine)) {
-        seen.add(trimmedLine);
-        result.push(trimmedLine);
+      if (!skipCurrentGroup) {
+        currentGroup = groupName;
+        if (!seen.has(trimmedLine)) {
+          seen.add(trimmedLine);
+          result.push(trimmedLine);
+        }
       }
     }
     else if (trimmedLine.match(/^.+,.+$/)) {
-      if (currentGroup === null) {
+      if (skipCurrentGroup) {
         continue;
       }
       
-      if (shouldFilterChannel(trimmedLine)) {
+      if (shouldFilter(trimmedLine)) {
         continue;
       }
       
@@ -119,6 +115,7 @@ function processM3uFormat(content) {
   const lines = content.split('\n');
   const seen = new Set();
   const result = [];
+  let skipNextUrl = false;
   
   for (const line of lines) {
     const trimmedLine = line.trim();
@@ -131,15 +128,22 @@ function processM3uFormat(content) {
     }
     
     if (trimmedLine.startsWith('#EXTINF')) {
-      if (shouldFilterChannel(trimmedLine)) {
+      // 检查EXTINF行是否包含过滤词
+      skipNextUrl = shouldFilter(trimmedLine);
+      
+      if (!skipNextUrl) {
+        if (!seen.has(trimmedLine)) {
+          seen.add(trimmedLine);
+          result.push(trimmedLine);
+        }
+      }
+    } else if (!trimmedLine.startsWith('#') && trimmedLine) {
+      // 如果前一行的EXTINF被过滤，则跳过这个URL
+      if (skipNextUrl) {
+        skipNextUrl = false;
         continue;
       }
       
-      if (!seen.has(trimmedLine)) {
-        seen.add(trimmedLine);
-        result.push(trimmedLine);
-      }
-    } else if (!trimmedLine.startsWith('#') && trimmedLine) {
       if (!seen.has(trimmedLine)) {
         seen.add(trimmedLine);
         result.push(trimmedLine);
