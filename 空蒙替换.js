@@ -3,6 +3,10 @@ const RULES_CONFIG = {
   EXTERNAL_RULES_URL: 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
   DEFAULT_GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道'],
   DEFAULT_CHANNEL_FILTERS: ['t.me', 'TG群', '提醒', '不正确', '更新', '下载', '维护', '打赏', '支持', '好用', '提示', '温馨', 'HTTP'],
+  DEFAULT_EPG_URL: 'https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz',
+  DEFAULT_LOGO_URL_TEMPLATE: 'https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png',
+  DEFAULT_UA: '',
+  DEFAULT_CATCHUP_SOURCE: '',
   CCTV_CHANNEL_KEYWORDS: ['cctv', 'cetv', 'cgtn'],
   SPECIAL_CHANNEL_MAPPING: {}
 };
@@ -13,16 +17,16 @@ const RULES_CONFIG = {
 
   let groupFilters = RULES_CONFIG.DEFAULT_GROUP_FILTERS;
   let channelFilters = RULES_CONFIG.DEFAULT_CHANNEL_FILTERS;
-  let epgUrl = '';
-  let logoUrlTemplate = '';
-  let defaultUA = '';
-  let catchupSource = '';
+  let epgUrl = RULES_CONFIG.DEFAULT_EPG_URL;
+  let logoUrlTemplate = RULES_CONFIG.DEFAULT_LOGO_URL_TEMPLATE;
+  let defaultUA = RULES_CONFIG.DEFAULT_UA;
+  let catchupSource = RULES_CONFIG.DEFAULT_CATCHUP_SOURCE;
 
   // 加载外部规则(同步方式)
   function loadExternalRules() {
     try {
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', RULES_CONFIG.EXTERNAL_RULES_URL, false); // 同步请求
+      xhr.open('GET', RULES_CONFIG.EXTERNAL_RULES_URL, false);
       xhr.send();
 
       if (xhr.status === 200 && xhr.responseText) {
@@ -49,24 +53,17 @@ const RULES_CONFIG = {
         console.log('✓ 外部规则加载成功');
         return true;
       } else {
-        console.error('✗ 外部规则加载失败: HTTP状态 ' + xhr.status);
+        console.warn('⚠ 外部规则加载失败,使用默认规则');
         return false;
       }
     } catch (e) {
-      console.error('✗ 外部规则加载异常:', e.message);
+      console.warn('⚠ 外部规则加载异常,使用默认规则:', e.message);
       return false;
     }
   }
 
-  // 必须先加载规则 - 如果失败直接返回错误提示
-  const rulesLoaded = loadExternalRules();
-
-  if (!rulesLoaded) {
-    console.error('✗ 致命错误: 无法加载外部规则，请检查网络连接或规则URL是否正确');
-    return '✗ 致命错误: 无法加载外部规则，操作已中止';
-  }
-
-  // ==================== 规则加载成功，继续往下执行 ====================
+  // 加载规则，失败时使用默认规则
+  loadExternalRules();
 
   const CCTV_CHANNEL_KEYWORDS = RULES_CONFIG.CCTV_CHANNEL_KEYWORDS;
   const SPECIAL_CHANNEL_MAPPING = RULES_CONFIG.SPECIAL_CHANNEL_MAPPING;
@@ -242,6 +239,43 @@ const RULES_CONFIG = {
     return sortedResult.join('\n');
   }
 
+  function convertTxtToM3u(txtContent) {
+    const lines = txtContent.split('\n');
+    const result = [buildM3uHeader()];
+    const seen = new Set();
+    let currentGroup = null;
+
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) continue;
+
+      if (trimmedLine.match(/^.+,#genre#$/)) {
+        const groupName = trimmedLine.split(',')[0].trim();
+        currentGroup = groupName;
+      } else if (trimmedLine.match(/^.+,.+$/) && currentGroup) {
+        const parts = trimmedLine.split(',');
+        const channelName = parts[0].trim();
+        const url = parts[1].trim();
+
+        const logoUrl = generateLogoUrl(channelName);
+        let extinf = `#EXTINF:-1 tvg-name="${channelName}" group-title="${currentGroup}"`;
+        
+        if (logoUrl) {
+          extinf += ` tvg-logo="${logoUrl}"`;
+        }
+        extinf += `,${channelName}`;
+
+        if (!seen.has(extinf)) {
+          seen.add(extinf);
+          result.push(extinf);
+          result.push(url);
+        }
+      }
+    }
+
+    return result.join('\n');
+  }
+
   function processM3uFormat(content) {
     const lines = content.split('\n');
     const seen = new Set();
@@ -264,10 +298,6 @@ const RULES_CONFIG = {
       }
 
       if (trimmedLine.startsWith('#EXTINF')) {
-        if (pendingExtinf !== null && !skipNextUrl) {
-          // 前一个频道没有链接，不添加到结果中
-        
-
         skipNextUrl = shouldFilter(trimmedLine);
 
         if (!skipNextUrl) {
@@ -277,22 +307,18 @@ const RULES_CONFIG = {
           if (transformed) {
             let newExtinf = trimmedLine.replace(displayName, transformed.name);
 
-            // 添加LOGO
             const logoUrl = generateLogoUrl(transformed.name);
             if (logoUrl && !newExtinf.includes('tvg-logo=')) {
               newExtinf = newExtinf.replace('#EXTINF:-1', `#EXTINF:-1 tvg-logo="${logoUrl}"`);
             }
 
-            // 暂存这个EXTINF行，等待确认有链接后再添加
             pendingExtinf = newExtinf;
           } else {
             skipNextUrl = true;
           }
         }
       } else if (!trimmedLine.startsWith('#') && trimmedLine) {
-        // 这是一个URL行
         if (!skipNextUrl && pendingExtinf !== null) {
-          // 确认前面的EXTINF行有对应的链接，添加到结果中
           if (!seen.has(pendingExtinf)) {
             seen.add(pendingExtinf);
             result.push(pendingExtinf);
@@ -301,27 +327,31 @@ const RULES_CONFIG = {
           if (!seen.has(trimmedLine)) {
             seen.add(trimmedLine);
             result.push(trimmedLine);
-          
+          }
 
-          pendingExtinf = null; // 已处理，清空待处理
-        } else if (skipNextUrl) {
-          // 这个URL被过滤了，也清空待处理的EXTINF
           pendingExtinf = null;
-        }
+        } else if (skipNextUrl) {
+          pendingExtinf = null;
+        
 
         skipNextUrl = false;
       }
     }
 
-    // 如果文件最后有待处理的EXTINF但没有链接，则删除它(不添加到结果)
-    pendingExtinf = null;
-
     return result.join('\n');
   }
 
-  // 流程：加载规则 -> 获取源 -> 判定源格式 -> 转换补全 -> 过滤 -> 排序 -> 输出
+  // 流程：加载规则 -> 获取源 -> 判定源格式 -> 转换补全 -> 过滤排序 -> 输出
   const format = detectFormat(content);
-  content = format === 'M3U' ? processM3uFormat(content) : processTxtFormat(content);
+  
+  if (format === 'TXT') {
+    // TXT格式先过滤排序，然后转换为M3U
+    content = processTxtFormat(content);
+    content = convertTxtToM3u(content);
+  } else {
+    // M3U格式直接补全
+    content = processM3uFormat(content);
+  }
 
   const replaceParam = global.params.replace;
   if (typeof replaceParam === "string" && replaceParam.length > 0) {
