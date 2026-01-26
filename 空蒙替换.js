@@ -5,7 +5,8 @@
 
   content = content
     .replaceAll("https://", "webview://https://")
-    .replaceAll("http://A/ku9/js/webview.js?id=", "webview://");
+    .replaceAll("http://A/ku9/js/webview.js?id=", "webview://")
+    .replaceAll("http://", "webview://http://");
 
   return content;
 })();
