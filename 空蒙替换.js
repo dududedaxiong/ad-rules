@@ -8,7 +8,7 @@ typeof globalThis !== "undefined"
 
 // ========== 配置区域（方便维护）==========
 // 外部订阅规则地址
-const EXTERNAL_RULES_URL = 'https://ghfast.top/https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt';
+const EXTERNAL_RULES_URL = 'https://ghfast.top/https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/%E7%A9%BA%E8%92%99%E6%9B%BF%E6%8D%A2%E8%A7%84%E5%88%99.txt';
 
 // 默认过滤规则
 const DEFAULT_GROUP_FILTERS = ['公告', '说明', '温馨', 'Information', '机场', 'TG频道'];
