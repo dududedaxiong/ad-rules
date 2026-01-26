@@ -1,10 +1,10 @@
 // ==================== 规则配置区域 ====================
 const RULES_CONFIG = {
   // 外部规则地址
-  EXTERNAL_RULES_URL: 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
+  EXTERNAL_RULES_URL: 'https://ghfast.top/https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
   
   // 1. 分组过滤词 (模糊匹配：只要包含这些词的分组都会被整组剔除)
-  LOCAL_GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '更新列表', '更新时间'],
+  LOCAL_GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '更新列表', '更新时间', '冰茶'],
   
   // 2. 频道过滤词 (模糊匹配：只剔除匹配到的单个频道)
   LOCAL_CHANNEL_FILTERS: [
