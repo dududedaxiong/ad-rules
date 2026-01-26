@@ -285,7 +285,7 @@ const RULES_CONFIG = {
 
             // 暂存这个EXTINF行，等待确认有链接后再添加
             pendingExtinf = newExtinf;
-           else {
+          } else {
             skipNextUrl = true;
           }
         }
@@ -319,6 +319,7 @@ const RULES_CONFIG = {
     return result.join('\n');
   }
 
+  // 流程：加载规则 -> 获取源 -> 判定源格式 -> 转换补全 -> 过滤 -> 排序 -> 输出
   const format = detectFormat(content);
   content = format === 'M3U' ? processM3uFormat(content) : processTxtFormat(content);
 
