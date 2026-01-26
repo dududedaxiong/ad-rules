@@ -8,47 +8,45 @@ typeof globalThis !== "undefined"
 
 // ========== 配置区域（方便维护）==========
 // 外部订阅规则地址
-const EXTERNAL_RULES_URL = global.params.rulesUrl || '';
+const EXTERNAL_RULES_URL = 'https://ghfast.top/https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt';
 
 // 默认过滤规则
 const DEFAULT_GROUP_FILTERS = ['公告', '说明', '温馨', 'Information', '机场', 'TG频道'];
-const DEFAULT_CHANNEL_FILTERS = ['t.me', 'TG群', '提醒', '不正确', '更新', '下载', '维护', '打赏', '支持', '好用', '提示', '温馨', '免费订阅'];
+const DEFAULT_CHANNEL_FILTERS = ['t.me', 'TG群', '提醒', '不正确', '更新', '下载', '维护', '打赏', '支持', '好用', '提示', '温馨', '免费订阅', 'HTTP'];
 
 // ========== 配置区域结束 ==========
 
 let content = global.YYKM.fetch(global.params.url);  
 
-// 获取过滤规则（优先使用外部规则，否则使用默认规则）
+// 获取过滤规则
 let groupFilters = DEFAULT_GROUP_FILTERS;
 let channelFilters = DEFAULT_CHANNEL_FILTERS;
 
 // 尝试从外部订阅获取规则
-if (EXTERNAL_RULES_URL) {
-  try {
-    const externalRules = global.YYKM.fetch(EXTERNAL_RULES_URL);
-    const rulesLines = externalRules.split('\n');
+try {
+  const externalRules = global.YYKM.fetch(EXTERNAL_RULES_URL);
+  const rulesLines = externalRules.split('\n');
+  
+  for (const line of rulesLines) {
+    const trimmed = line.trim();
     
-    for (const line of rulesLines) {
-      const trimmed = line.trim();
-      
-      if (trimmed.startsWith('GROUP_FILTERS=')) {
-        groupFilters = trimmed.replace('GROUP_FILTERS=', '').split('|').map(f => f.trim());
-      } else if (trimmed.startsWith('CHANNEL_FILTERS=')) {
-        channelFilters = trimmed.replace('CHANNEL_FILTERS=', '').split('|').map(f => f.trim());
-      }
+    if (trimmed.startsWith('GROUP_FILTERS=')) {
+      groupFilters = trimmed.replace('GROUP_FILTERS=', '').split('|').map(f => f.trim()).filter(f => f);
+    } else if (trimmed.startsWith('CHANNEL_FILTERS=')) {
+      channelFilters = trimmed.replace('CHANNEL_FILTERS=', '').split('|').map(f => f.trim()).filter(f => f);
     }
-  } catch (e) {
-    // 外部规则获取失败，使用默认规则
   }
+} catch (e) {
+  // 外部规则获取失败，使用默认规则
 }
 
-// 参数覆盖（如果在params中指定了规则）
+// 参数覆盖
 if (global.params.groupFilters) {
-  groupFilters = global.params.groupFilters.split('|').map(f => f.trim());
+  groupFilters = global.params.groupFilters.split('|').map(f => f.trim()).filter(f => f);
 }
 
 if (global.params.channelFilters) {
-  channelFilters = global.params.channelFilters.split('|').map(f => f.trim());
+  channelFilters = global.params.channelFilters.split('|').map(f => f.trim()).filter(f => f);
 }
 
 // 检查是否应该过滤分组
