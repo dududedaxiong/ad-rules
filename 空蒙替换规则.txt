@@ -1,2 +1,6 @@
-GROUP_FILTERS=公告|机场|维护|官方
-CHANNEL_FILTERS=t.me|TG群|打赏|支持
+GROUP_FILTERS=公告|说明|温馨|Information|机场|TG频道
+CHANNEL_FILTERS=t.me|TG群|提醒|不正确|更新|下载|维护|打赏|支持|好用|提示|温馨|HTTP
+EPG_URL=https://example.com/epg.xml
+LOGO_URL_TEMPLATE=https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png
+PLAYBACK_MODE=回看方式|默认值
+DEFAULT_UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
