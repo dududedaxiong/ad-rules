@@ -1,6 +1,7 @@
-GROUP_FILTERS=公告|说明|温馨|Information|机场|TG频道
-CHANNEL_FILTERS=t.me|TG群|提醒|不正确|更新|下载|维护|打赏|支持|好用|提示|温馨|HTTP
-EPG_URL=https://example.com/epg.xml
+GROUP_FILTERS=公告|说明|温馨|Information|机场|TG频道|更新列表|更新时间|冰茶
+CHANNEL_FILTERS=t.me|提示|提醒|温馨|说明|公告|更新|TG|电报|QQ|钉钉|微信|下载|免费|进群|贩卖|用爱发电|上当|死|盗源|白嫖|隐藏|增加|失联|关注|迷路|扫码|入群|进群|组织|支持|赞助|添加|私信|查询
+EPG_URL=https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz
 LOGO_URL_TEMPLATE=https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png
-PLAYBACK_MODE=回看方式|默认值
-DEFAULT_UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+PLAYBACK_MODE=
+DEFAULT_UA=
+
