@@ -1,213 +1,183 @@
 // ==================== 规则配置区域 ====================
 const RULES_CONFIG = {
-  // 外部规则文件地址
   EXTERNAL_RULES_URL: 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
-  
-  // 1. 分组过滤 (并集模式：本地 + 外部)
-  // 只要分组名包含以下词汇，整组剔除。例如：包含“冰茶”则“冰茶体育”、“冰茶公告”全杀。
-  LOCAL_GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '更新列表', '更新时间', '冰茶'],
-  
-  // 2. 频道过滤 (并集模式：本地 + 外部)
-  // 只要频道名包含以下词汇，该频道剔除。
-  LOCAL_CHANNEL_FILTERS: [
-    't.me', '提示', '提醒', '温馨', '说明', '公告', '更新', 'TG', '电报', 'QQ', '钉钉', '微信', 
-    '下载', '免费', '进群', '贩卖', '用爱发电', '上当', '死', '盗源', '白嫖', '隐藏', '增加', 
-    '失联', '关注', '迷路', '扫码', '入群', '组织', '支持', '赞助', '添加', '私信', '查询'
-  ],
-  
-  // 默认配置参数
-  EPG_URL: 'https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz',
-  LOGO_URL_TEMPLATE: 'https://gcore.jsdelivr.net/gh/taksssss/tv/icon/{channel_name}.png',
-  DEFAULT_UA: 'YYKM/1.0',
-  CCTV_KEYWORDS: ['cctv', 'cetv', 'cgtn', '央视']
+  // 增加本地保底过滤词，确保外部加载失败也能过滤“冰茶”
+  DEFAULT_GROUP_FILTERS: ['公告', '说明', '温馨', 'Information', '机场', 'TG频道', '冰茶'],
+  DEFAULT_CHANNEL_FILTERS: ['t.me', 'TG群', '提醒', '不正确', '更新', '下载', '维护', '打赏', '支持', '好用', '提示', '温馨', 'HTTP', '密码不正确'],
+  CCTV_CHANNEL_KEYWORDS: ['cctv', 'cetv', 'cgtn'],
+  SPECIAL_CHANNEL_MAPPING: {}
 };
 // ==================== 规则配置区域结束 ====================
 
 (() => {
-  const global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this;
+const global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : this;
 
-  // 使用 Set 存储规则，确保去重且匹配高效
-  let groupFilters = new Set(RULES_CONFIG.LOCAL_GROUP_FILTERS.map(s => s.toLowerCase()));
-  let channelFilters = new Set(RULES_CONFIG.LOCAL_CHANNEL_FILTERS.map(s => s.toLowerCase()));
-  let currentEPG = RULES_CONFIG.EPG_URL;
-  let currentLogo = RULES_CONFIG.LOGO_URL_TEMPLATE;
-  let currentUA = RULES_CONFIG.DEFAULT_UA;
+// 使用 Set 确保并集，解决“冰茶”过滤不掉的问题
+let groupFilters = new Set(RULES_CONFIG.DEFAULT_GROUP_FILTERS.map(f => f.toLowerCase()));
+let channelFilters = new Set(RULES_CONFIG.DEFAULT_CHANNEL_FILTERS.map(f => f.toLowerCase()));
 
-  /**
-   * 1. 加载外部规则并合并 (实现并集)
-   */
-  function syncExternalRules() {
-    try {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', RULES_CONFIG.EXTERNAL_RULES_URL, false);
-      xhr.send();
-      if (xhr.status === 200 && xhr.responseText) {
-        const lines = xhr.responseText.split(/\r?\n/);
-        lines.forEach(line => {
-          const t = line.trim();
-          if (!t || !t.includes('=')) return;
-          const splitIdx = t.indexOf('=');
-          const key = t.substring(0, splitIdx).trim();
-          const val = t.substring(splitIdx + 1).trim();
-          if (!val) return;
-
-          if (key === 'GROUP_FILTERS') {
-            val.split('|').forEach(s => { if(s.trim()) groupFilters.add(s.trim().toLowerCase()); });
-          } else if (key === 'CHANNEL_FILTERS') {
-            val.split('|').forEach(s => { if(s.trim()) channelFilters.add(s.trim().toLowerCase()); });
-          } else if (key === 'EPG_URL') {
-            currentEPG = val;
-          } else if (key === 'LOGO_URL_TEMPLATE') {
-            currentLogo = val;
-          }
-        });
+function loadExternalRules() {
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', RULES_CONFIG.EXTERNAL_RULES_URL, false);
+    xhr.send();
+    if (xhr.status === 200 && xhr.responseText) {
+      const rulesLines = xhr.responseText.split('\n');
+      for (const line of rulesLines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('GROUP_FILTERS=')) {
+          trimmed.replace('GROUP_FILTERS=', '').split('|').forEach(f => { if(f.trim()) groupFilters.add(f.trim().toLowerCase()); });
+        } else if (trimmed.startsWith('CHANNEL_FILTERS=')) {
+          trimmed.replace('CHANNEL_FILTERS=', '').split('|').forEach(f => { if(f.trim()) channelFilters.add(f.trim().toLowerCase()); });
+        }
       }
-    } catch (e) {
-      console.warn('⚠ 外部规则读取失败，仅使用本地缓存规则');
-    }
-  }
-  syncExternalRules();
-
-  /**
-   * 2. 核心模糊匹配算法
-   */
-  function isGroupBad(name) {
-    if (!name) return false;
-    const target = name.toLowerCase().replace(/\s+/g, ''); // 移除所有空格进行极致模糊匹配
-    for (let f of groupFilters) {
-      if (target.includes(f.replace(/\s+/g, ''))) return true;
+      return true;
     }
     return false;
-  }
+  } catch (e) { return false; }
+}
 
-  function isChannelBad(name) {
-    if (!name) return false;
-    const target = name.toLowerCase().replace(/\s+/g, '');
-    for (let f of channelFilters) {
-      if (target.includes(f.replace(/\s+/g, ''))) return true;
+loadExternalRules();
+
+// 极致模糊匹配：移除空格并转小写
+function isMatch(text, filterSet) {
+  if (!text) return false;
+  const target = text.toLowerCase().replace(/\s+/g, '');
+  for (let f of filterSet) {
+    if (target.includes(f.replace(/\s+/g, ''))) return true;
+  }
+  return false;
+}
+
+// 优化 CCTV 规范化逻辑
+function normalizeCCTVName(name) {
+  const trimmed = name.trim();
+  const match = trimmed.match(/^(cctv|cetv|cgtn)[\s-]*(\d+)(.*?)$/i);
+  if (match) {
+    const prefix = match[1].toUpperCase();
+    const number = parseInt(match[2], 10);
+    const suffix = match[3].trim();
+    return suffix ? `${prefix}-${number} ${suffix}` : `${prefix}-${number}`;
+  }
+  return trimmed;
+}
+
+// 修复排序逻辑：解决 CCTV-4 乱序问题
+function extractCCTVNumber(name) {
+  const match = name.match(/(?:CCTV|CETV|CGTN)[\s-]*(\d+)/i);
+  return match ? parseInt(match[1], 10) : 999;
+}
+
+const globalSortChannels = (lines) => {
+  const grouped = {};
+  const groupOrder = [];
+  let currentGroup = null;
+
+  for (const line of lines) {
+    if (line.match(/^.+,#genre#$/)) {
+      currentGroup = line.split(',')[0].trim();
+      if (!grouped[currentGroup]) {
+        grouped[currentGroup] = [];
+        groupOrder.push(currentGroup);
+      }
+    } else if (line.includes(',') && currentGroup) {
+      grouped[currentGroup].push(line);
     }
-    return false;
   }
 
-  function normCCTV(name) {
-    const t = name.trim();
-    const m = t.match(/^(cctv|cetv|cgtn)[\s-]*(\d+)(.*?)$/i);
-    if (m) {
-      const prefix = m[1].toUpperCase();
-      const suffix = m[3].trim();
-      return suffix ? `${prefix}-${m[2]} ${suffix}` : `${prefix}-${m[2]}`;
-    }
-    return t;
+  // 针对 CCTV 组进行精确数字排序
+  for (const g in grouped) {
+    grouped[g].sort((a, b) => {
+      const nameA = a.split(',')[0];
+      const nameB = b.split(',')[0];
+      const numA = extractCCTVNumber(nameA);
+      const numB = extractCCTVNumber(nameB);
+      if (numA !== numB) return numA - numB;
+      return nameA.localeCompare(nameB, 'zh-CN');
+    });
   }
 
-  /**
-   * 3. M3U 处理 (分组/频道独立过滤)
-   */
-  function processM3u(content) {
-    const lines = content.split(/\r?\n/);
-    let res = `#EXTM3U x-tvg-url="${currentEPG}" http-user-agent="${currentUA}"\n`;
-    const seenUrls = new Set();
+  const result = [];
+  const types = { 'CCTV': [], '卫视': [], '其他': [] };
+  groupOrder.forEach(gn => {
+    if (gn.toUpperCase().includes('CCTV')) types['CCTV'].push(gn);
+    else if (gn.includes('卫视')) types['卫视'].push(gn);
+    else types['其他'].push(gn);
+  });
 
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line || line.startsWith('#EXTM3U')) continue;
+  ['CCTV', '卫视', '其他'].forEach(t => {
+    types[t].forEach(gn => {
+      result.push(`${gn},#genre#`);
+      result.push(...grouped[gn]);
+    });
+  });
+  return result;
+};
 
-      if (line.startsWith('#EXTINF')) {
-        const groupMatch = line.match(/group-title="([^"]+)"/i);
-        const groupName = groupMatch ? groupMatch[1] : "";
-        const displayName = line.split(',').pop();
+// M3U 核心处理：精准捕获 group-title
+function processM3uFormat(content) {
+  const lines = content.split('\n');
+  const seenUrls = new Set();
+  const result = [];
+  result.push('#EXTM3U');
 
-        // 【解耦判定】分组包含关键词 OR 频道包含关键词，则剔除
-        if (isGroupBad(groupName) || isChannelBad(displayName)) {
-          i++; // 跳过URL行
-          continue;
-        }
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line.startsWith('#EXTINF')) {
+      const gMatch = line.match(/group-title="([^"]+)"/i);
+      const groupName = gMatch ? gMatch[1] : "其他";
+      const displayName = line.split(',').pop();
 
-        const urlLine = lines[i+1] ? lines[i+1].trim() : "";
-        if (urlLine && urlLine.startsWith('http') && !seenUrls.has(urlLine)) {
-          const name = normCCTV(displayName);
-          const logo = currentLogo.replace('{channel_name}', encodeURIComponent(name));
-          let head = line.replace(/tvg-logo="[^"]*"/i, `tvg-logo="${logo}"`);
-          if (!head.includes('tvg-logo')) head = head.replace('#EXTINF:-1', `#EXTINF:-1 tvg-logo="${logo}"`);
-          res += head.replace(displayName, name) + "\n" + urlLine + "\n";
-          seenUrls.add(urlLine);
-          i++;
-        }
+      // 分组和频道独立过滤
+      if (isMatch(groupName, groupFilters) || isMatch(displayName, channelFilters)) {
+        i++; continue; 
+      }
+
+      const url = lines[i+1] ? lines[i+1].trim() : "";
+      if (url && url.startsWith('http') && !seenUrls.has(url)) {
+        const newName = normalizeCCTVName(displayName);
+        const newInf = line.replace(displayName, newName).replace(/group-title="[^"]*"/i, `group-title="${groupName}"`);
+        result.push(newInf, url);
+        seenUrls.add(url);
+        i++;
       }
     }
-    return res;
   }
+  return result.join('\n');
+}
 
-  /**
-   * 4. TXT 处理 (分组/频道独立过滤)
-   */
-  function processTxt(content) {
-    const lines = content.split(/\r?\n/);
-    const groups = {};
-    const groupOrder = [];
-    let curG = "其他";
-    let skipG = false;
-
-    lines.forEach(line => {
-      const t = line.trim();
-      if (!t) return;
-
-      if (t.includes(',#genre#')) {
-        const gName = t.split(',')[0].trim();
-        skipG = isGroupBad(gName); // 【独立分组过滤】
-        if (!skipG) {
-          curG = gName;
-          if (!groups[curG]) { groups[curG] = []; groupOrder.push(curG); }
-        }
-      } else if (t.includes(',')) {
-        if (skipG) return;
-        const [name, url] = t.split(',');
-        if (url && url.startsWith('http') && !isChannelBad(name)) { // 【独立频道过滤】
-          groups[curG].push({ name: normCCTV(name), url: url.trim() });
-        }
+function processTxtFormat(content) {
+  const lines = content.split('\n');
+  const result = [];
+  let skipG = false;
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t) continue;
+    if (t.includes(',#genre#')) {
+      skipG = isMatch(t.split(',')[0], groupFilters);
+      if (!skipG) result.push(t);
+    } else if (t.includes(',') && !skipG) {
+      const [name, url] = t.split(',');
+      if (!isMatch(name, channelFilters)) {
+        result.push(`${normalizeCCTVName(name)},${url}`);
       }
-    });
-
-    const sortedGroupNames = groupOrder.sort((a, b) => {
-      const getW = (n) => {
-        const un = n.toUpperCase();
-        if (RULES_CONFIG.CCTV_KEYWORDS.some(k => un.includes(k.toUpperCase()))) return 1;
-        if (un.includes('卫视')) return 2;
-        return 3;
-      };
-      return getW(a) - getW(b) || a.localeCompare(b, 'zh-CN');
-    });
-
-    let result = `#EXTM3U x-tvg-url="${currentEPG}" http-user-agent="${currentUA}"\n`;
-    sortedGroupNames.forEach(gn => {
-      const channels = groups[gn];
-      channels.sort((a, b) => (parseInt(a.name.match(/\d+/)) || 999) - (parseInt(b.name.match(/\d+/)) || 999) || a.name.localeCompare(b.name, 'zh-CN'));
-      const seen = new Set();
-      channels.forEach(ch => {
-        if (seen.has(ch.url)) return;
-        seen.add(ch.url);
-        const logo = currentLogo.replace('{channel_name}', encodeURIComponent(ch.name));
-        result += `#EXTINF:-1 tvg-name="${ch.name}" tvg-logo="${logo}" group-title="${gn}",${ch.name}\n${ch.url}\n`;
-      });
-    });
-    return result;
+    }
   }
+  return globalSortChannels(result).join('\n');
+}
 
-  // --- 主流程 ---
-  let content = global.YYKM.fetch(global.params.url);
-  if (!content) return "";
+let content = global.YYKM.fetch(global.params.url);
+const format = content.trim().startsWith('#EXTM3U') ? 'M3U' : 'TXT';
+content = format === 'M3U' ? processM3uFormat(content) : processTxtFormat(content);
 
-  const isM3u = content.trim().startsWith('#EXTM3U');
-  content = isM3u ? processM3u(content) : processTxt(content);
+// 自定义替换逻辑
+const replaceParam = global.params.replace;
+if (typeof replaceParam === "string") {
+  replaceParam.split(";").forEach(rule => {
+    const [from, to] = rule.split("->");
+    if (from && to) content = content.replaceAll(from, to);
+  });
+}
 
-  // replace 参数执行
-  const rep = global.params.replace;
-  if (rep && typeof rep === "string") {
-    rep.split(";").forEach(r => {
-      const idx = r.indexOf("->");
-      if (idx !== -1) content = content.replaceAll(r.slice(0, idx), r.slice(idx + 2));
-    });
-  }
-
-  return content;
+return content;
 })();
