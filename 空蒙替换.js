@@ -1,9 +1,11 @@
 // ==================== 1. 配置区 ====================
 const RULES_CONFIG = {
     REMOTE_URL: 'https://raw.githubusercontent.com/dududedaxiong/-/refs/heads/main/空蒙替换规则.txt',
-    
-    // 固定的物理显示顺序（这些大类排在最前面）
     GROUP_ORDER: ['央视频道', '卫视频道', '地方频道', '高清频道', '港澳频道', '台湾频道', '体育频道'],
+    
+    // 【新增】内置默认过滤规则，防止订阅失败导致过滤失效
+    DEFAULT_GROUP_FILTERS: '公告|说明|温馨|Information|机场|TG频道|更新列表|更新时间|冰茶',
+    DEFAULT_CHANNEL_FILTERS: 't.me|提示|提醒|温馨|说明|公告|更新|TG|电报|QQ|钉钉|微信|下载|免费|进群|贩卖|用爱发电|上当|死|盗源|白嫖|隐藏|增加|失联|关注|迷路|扫码|入群|进群|组织|支持|赞助|添加|私信|查询',
 
     DEFAULT_UA: 'YYKM/1.0',
     DEFAULT_EPG: 'https://ghfast.top/https://raw.githubusercontent.com/plsy1/epg/main/e/seven-days.xml.gz',
@@ -16,12 +18,12 @@ const RULES_CONFIG = {
     const t2sMap = { '翡': '翡', '翠': '翠', '台': '台', '鳳': '凤', '凰': '凰', '衛': '卫', '視': '视', '廣': '广', '東': '东', '體': '体', '育': '育', '央': '央', '華': '华', '亞': '亚', '蓮': '莲', '花': '花', '灣': '湾' };
     function toS(str) { return str ? str.split('').map(c => t2sMap[c] || c).join('') : ""; }
 
-    let groupFilters = new Set();
-    let channelFilters = new Set();
+    // 先填入默认过滤词
+    let groupFilters = new Set(RULES_CONFIG.DEFAULT_GROUP_FILTERS.split('|').map(f => f.trim().toLowerCase()));
+    let channelFilters = new Set(RULES_CONFIG.DEFAULT_CHANNEL_FILTERS.split('|').map(f => f.trim().toLowerCase()));
     let categoryMap = [];
     let runtimeConfig = { epg: RULES_CONFIG.DEFAULT_EPG, logo: RULES_CONFIG.DEFAULT_LOGO, ua: RULES_CONFIG.DEFAULT_UA };
 
-    // 远程规则提取
     function extractRemoteSettings() {
         try {
             const xhr = new XMLHttpRequest();
@@ -30,9 +32,12 @@ const RULES_CONFIG = {
             if (xhr.status !== 200) return;
             const content = xhr.responseText;
             const lines = content.split(/\r?\n/);
+            
             lines.forEach(line => {
                 const t = line.trim();
                 if (!t || t.startsWith('#') || t.startsWith('//')) return;
+                
+                // 远程有规则时，追加到 Set 中，而不是覆盖，确保默认规则始终有效
                 if (/GROUP_FILTER/i.test(t) && t.includes('=')) {
                     t.split('=')[1].split('|').forEach(f => groupFilters.add(f.trim().toLowerCase()));
                 } else if (/CHANNEL_FILTER/i.test(t) && t.includes('=')) {
@@ -52,7 +57,6 @@ const RULES_CONFIG = {
     }
     extractRemoteSettings();
 
-    // 修改后的智能识别：只负责返回匹配的大类，不匹配则返回null
     function getSmartGroup(chName) {
         const name = toS(chName).toUpperCase();
         for (const item of categoryMap) {
@@ -66,11 +70,15 @@ const RULES_CONFIG = {
         return m ? parseInt(m[1], 10) : 999;
     }
 
+    // 核心过滤逻辑：移除空格并繁简通杀比对
     function isBad(text, filterSet) {
         if (!text) return false;
-        const t = toS(text).toLowerCase().replace(/\s+/g, '');
+        // 处理待检测文本：转简体 -> 去空格 -> 小写
+        const cleanText = toS(text).toLowerCase().replace(/\s+/g, '');
         for (let f of filterSet) {
-            if (t.includes(toS(f).toLowerCase().replace(/\s+/g, ''))) return true;
+            // 处理过滤词：转简体 -> 去空格 -> 小写
+            const cleanFilter = toS(f).toLowerCase().replace(/\s+/g, '');
+            if (cleanFilter && cleanText.includes(cleanFilter)) return true;
         }
         return false;
     }
@@ -80,7 +88,6 @@ const RULES_CONFIG = {
         const rawChannels = [];
         const isM3u = content.trim().startsWith('#EXTM3U');
 
-        // 1. 解析原始数据
         if (isM3u) {
             for (let i = 0; i < lines.length; i++) {
                 if (lines[i].startsWith('#EXTINF')) {
@@ -104,14 +111,14 @@ const RULES_CONFIG = {
             });
         }
 
-        // 2. 核心逻辑：精准收纳或还原分组
         const groups = {};
         const seenUrl = new Set();
         rawChannels.forEach(ch => {
             if (seenUrl.has(ch.url)) return;
+            
+            // 判定：分组过滤 或 频道名过滤
             if (isBad(ch.group, groupFilters) || isBad(ch.name, channelFilters)) return;
 
-            // 判定目标分组：优先匹配规则大类，否则保留原组名
             const smartG = getSmartGroup(ch.name);
             const targetG = smartG ? smartG : ch.group; 
 
@@ -120,10 +127,7 @@ const RULES_CONFIG = {
             seenUrl.add(ch.url);
         });
 
-        // 3. 排序并生成
         let result = `#EXTM3U x-tvg-url="${runtimeConfig.epg}" http-user-agent="${runtimeConfig.ua}"\n`;
-        
-        // 排序逻辑：先排规则大类，再排剩下的原始组
         const allGroupKeys = Object.keys(groups);
         const sortedGroupNames = [...new Set([...RULES_CONFIG.GROUP_ORDER, ...allGroupKeys])];
 
