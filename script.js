@@ -10,13 +10,15 @@
             if (firstCommaIndex !== -1) {
                 let prefix = line.substring(0, firstCommaIndex + 1); 
                 let target = line.substring(firstCommaIndex + 1);
+                target = target.replaceAll("12", "34");
                 
                 return prefix + target;
             }
         }
         if ((trimLine.includes(",") && !trimLine.startsWith("#")) || /^(http|https|rtp|p3p|rtsp|mitv|video|webview):\/\//i.test(trimLine)) {
             let target = line;
-            
+            target = target.replaceAll("12", "34");
+                
             return target;
         }
         return line;
