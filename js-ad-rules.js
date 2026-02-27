@@ -235,9 +235,16 @@
     },
     "[小黄书]": {
         "keywords": [],
-        "classes": [],
+        "classes": [
+            "card-content",
+            "footer_container",
+            "swipeImg",
+            "twoColumnAdv"
+        ],
         "selectors": [
-            "div.container[style=\"margin-top: 10px;\"]"
+            "div.container[style=\"margin-top: 10px;\"]",
+            "div[style=\"display: block; width: 96%;\"]",
+            "span.rightBtn"
         ],
         "idsToHide": [],
         "interval": 1600
