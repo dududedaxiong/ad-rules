@@ -233,7 +233,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[小黄书]": {
+    "[xhs]": {
         "keywords": [],
         "classes": [
             "el-dialog__wrapper",
