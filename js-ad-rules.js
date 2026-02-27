@@ -253,7 +253,7 @@
             "span.rightBtn.sc-text",
             "span.van-tab__text.sc-text.cysc",
             "span.van-tab__text.sc-text.tcjy",
-            "div[class^='vodContainer-list-i-box'].i(0)"
+            "span[class^='vodContainer-list-item'].i(0)"
         ],
         "idsToHide": [],
         "interval": 1600
