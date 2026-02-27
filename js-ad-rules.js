@@ -264,5 +264,15 @@
             "popup-overly"
         ],
         "interval": 1600
+    },
+    "[小黄书]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "div.app-abk.sc-text",
+            "div.external-block-480j43a5c"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
