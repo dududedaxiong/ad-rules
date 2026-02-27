@@ -240,11 +240,14 @@
             "external-fx",
             "external-fx-content",
             "footer_container",
+            "header-container.i(1)",
             "swipeImg",
+            "sycs",
+            "tcjy",
             "twoColumnAdv",
             "van-icon",
             "vod-share",
-            "header-container.i(1)"
+            "navbar-item.i(-3,-2)"
         ],
         "selectors": [
             "div.app-abk.sc-text",
