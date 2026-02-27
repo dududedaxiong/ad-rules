@@ -166,7 +166,6 @@
             "div.square-advertisement.child_div_random",
             "div.text-adv-list.child_div_random",
             "div[style=\"display: flex;flex-wrap: wrap;justify-content: space-between;\"]",
-            "uni-view.cooperation > uni-view.every-box",
             "uni-view.header-avatar",
             "uni-view.tabbar-list",
             "uni-view.text-adv-list",
