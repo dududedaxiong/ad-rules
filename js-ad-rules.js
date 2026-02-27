@@ -237,7 +237,9 @@
         "keywords": [],
         "classes": [
             "card-content",
+            "el-dialog__wrapper",
             "external-fx",
+            "external-fx-content",
             "footer_container",
             "section",
             "swipeImg",
@@ -257,7 +259,10 @@
             "span[class^='vodContainer-list-item'].i(0)",
             "div[class^='vodContainer-list-item'].i(5)"
         ],
-        "idsToHide": [],
+        "idsToHide": [
+            "popup1",
+            "popup2"
+        ],
         "interval": 1600
     }
 }
