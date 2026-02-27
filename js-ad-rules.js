@@ -233,7 +233,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[xhs]": {
+    "[小黄书]": {
         "keywords": [],
         "classes": [
             "el-dialog__wrapper",
@@ -245,20 +245,22 @@
             "vod-share"
         ],
         "selectors": [
+            "div.app-abk.sc-text",
             "div.container.light-block",
             "div.container[style=\"margin-top: 10px;\"]",
+            "div.external-block-480j43a5c",
             "div.menu-link.menu-link-animate.red",
             "div.menu-link.menu-link-animate.yellow",
+            "div.section.i(-1)",
+            "div.swiper-wrapper[aria-live=\"off\"]",
+            "div[class^='vodContainer-list-item'].i(5)",
+            "div[class^='external-block-text-']",
             "div[style=\"text-align:center;\"]",
             "span.rightBtn",
             "span.rightBtn.sc-text",
             "span.van-tab__text.sc-text.cysc",
             "span.van-tab__text.sc-text.tcjy",
-            "span[class^='vodContainer-list-item'].i(0)",
-            "div[class^='vodContainer-list-item'].i(5)",
-            "div.section.i(-1)",
-            "div.app-abk.sc-text",
-            "div.external-block-480j43a5c"
+            "span[class^='vodContainer-list-item'].i(0)"
         ],
         "idsToHide": [
             "popup1",
