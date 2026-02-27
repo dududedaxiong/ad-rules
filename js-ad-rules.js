@@ -234,37 +234,26 @@
         "interval": 1600
     },
     "[小黄书]": {
-        "keywords": [],
-        "classes": [
-            "card-content",
-            "el-dialog__wrapper",
-            "external-fx",
-            "external-fx-content",
-            "footer_container",
-            "swipeImg",
-            "twoColumnAdv",
-            "vod-share"
-        ],
-        "selectors": [
-            "div.container.light-block",
-            "div.container[style=\"margin-top: 10px;\"]",
-            "div.menu-link.menu-link-animate.red",
-            "div.menu-link.menu-link-animate.yellow",
-            "div[style=\"text-align:center;\"]",
-            "span.rightBtn",
-            "span.rightBtn.sc-text",
-            "span.van-tab__text.sc-text.cysc",
-            "span.van-tab__text.sc-text.tcjy",
-            "span[class^='vodContainer-list-item'].i(0)",
-            "div[class^='vodContainer-list-item'].i(5)",
-            "div.section.i(-1)",
-            "div[id*='popup-overly']"
-        ],
-        "idsToHide": [
-            "popup1",
-            "popup2",
-            "popup-overly"
-        ],
-        "interval": 1600
-    }
+    "keywords": [],
+    "classes": [
+        "card-content",
+        "external-fx",
+        "footer_container",
+        "swipeImg",
+        "twoColumnAdv",
+        "vod-share",
+        "vodContainer-list-i-box" // 新增：通用类名匹配
+    ],
+    "selectors": [
+        "div[class^='vodContainer-list-i-box']", // 核心：移除 96% 宽度的占位块
+        "div[id*='popup-overly']",
+        "div.container.light-block",
+        "div[style*='margin-top: 10px']",
+        "div[style*='text-align:center']",
+        "span.rightBtn",
+        "span.van-tab__text.sc-text"
+    ],
+    "idsToHide": ["popup-overly"], // 尝试放入专门的 ID 数组
+    "interval": 1000 // 提高检测频率以快速移除弹窗
+}
 }
