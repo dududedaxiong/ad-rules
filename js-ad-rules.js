@@ -55,13 +55,15 @@
     },
     "/cn\\d+\\.91short\\.com/": {
         "blockUrls": [
+            "**?c=1&n=",
+            "**?n=",
             "*/public/ad**v=*",
+            "*/public/statics/js/*",
             "https://**.icu/**?**",
             "https://**/public/axios.min.js",
             "https://**/worker/PicWorker.js?v=**",
-            "https://bmatdyz.icu/**",
             "https://246886mc.ohdam3.com/**",
-            "*/public/statics/js/*"
+            "https://bmatdyz.icu/**"
         ],
         "keywords": [
             {
@@ -87,7 +89,7 @@
             "span[style=\"color: gold\"]"
         ],
         "idsToHide": [],
-        "interval": 1000
+        "interval": 1600
     },
     "_exclude": [
         "127.0.0.1",
