@@ -248,7 +248,12 @@
             "js-show-ios"
         ],
         "selectors": [
+            ".van-tab.i(-3,-2)",
+            "a.abk-item.abk-banner",
+            "a[class*='cysc']",
+            "a[class*='tcjy']",
             "div.app-abk.sc-text",
+            "div.card-content[style=\"padding: 0px 16px;\"]",
             "div.container.light-block",
             "div.container[style=\"margin-top: 10px;\"]",
             "div.external-block-480j43a5c",
@@ -256,21 +261,16 @@
             "div.menu-link.menu-link-animate.yellow",
             "div.section.i(-1)",
             "div.swiper-wrapper[aria-live=\"off\"]",
-            "div[class^='vodContainer-list-item'].i(5)",
             "div[class^='cvfooter']",
+            "div[class^='vodContainer-list-item'].i(5)",
             "div[style=\"text-align:center;\"]",
+            "id[class^='left']",
+            "li.navbar-item.i(-3,-2)",
             "span.rightBtn",
             "span.rightBtn.sc-text",
             "span[class*='cysc']",
             "span[class*='tcjy']",
-            "a[class*='cysc']",
-            "a[class*='tcjy']",
-            "span[class^='vodContainer-list-item'].i(0)",
-            ".van-tab.i(-3,-2)",
-            "li.navbar-item.i(-3,-2)",
-            "a.abk-item.abk-banner",
-            "id[class^='left']"
-            
+            "span[class^='vodContainer-list-item'].i(0)"
         ],
         "idsToHide": [
             "popup1",
