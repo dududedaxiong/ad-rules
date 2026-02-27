@@ -246,6 +246,8 @@
         "selectors": [
             "div.container.light-block",
             "div.container[style=\"margin-top: 10px;\"]",
+            "div.menu-link.menu-link-animate.red",
+            "div.menu-link.menu-link-animate.yellow",
             "div[style=\"text-align:center;\"]",
             "span.rightBtn",
             "span.rightBtn.sc-text",
