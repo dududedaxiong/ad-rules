@@ -241,7 +241,6 @@
             "external-fx",
             "external-fx-content",
             "footer_container",
-            "section.i(-1)",
             "swipeImg",
             "twoColumnAdv",
             "vod-share"
@@ -257,7 +256,8 @@
             "span.van-tab__text.sc-text.cysc",
             "span.van-tab__text.sc-text.tcjy",
             "span[class^='vodContainer-list-item'].i(0)",
-            "div[class^='vodContainer-list-item'].i(5)"
+            "div[class^='vodContainer-list-item'].i(5)",
+            "div.section.i(-1)"
         ],
         "idsToHide": [
             "popup1",
