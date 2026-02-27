@@ -265,7 +265,7 @@
             "span.van-tab__text.sc-text.cysc",
             "span.van-tab__text.sc-text.tcjy",
             "span[class^='vodContainer-list-item'].i(0)",
-            ".van-tab.i(-3,-2)"
+            "div.van-tab.i(-3,-2)"
         ],
         "idsToHide": [
             "popup1",
