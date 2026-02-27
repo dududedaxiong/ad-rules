@@ -268,7 +268,7 @@
             ".van-tab.i(-3,-2)",
             "li.navbar-item.i(-3,-2)",
             "a.abk-item.abk-banner",
-            "div[class*='left']"
+            "id[class*='left']"
             
         ],
         "idsToHide": [
