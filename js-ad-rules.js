@@ -247,7 +247,7 @@
             "twoColumnAdv",
             "van-icon",
             "vod-share",
-            "navbar-item.i(-3,-2)"
+            "van-tab.i(-3,-2)"
         ],
         "selectors": [
             "div.app-abk.sc-text",
