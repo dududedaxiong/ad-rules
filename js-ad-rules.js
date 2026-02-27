@@ -242,10 +242,10 @@
         "swipeImg",
         "twoColumnAdv",
         "vod-share",
-        "vodContainer-list-i-box" // 新增：通用类名匹配
+        "vodContainer-list-i-box"
     ],
     "selectors": [
-        "div[class^='vodContainer-list-i-box']", // 核心：移除 96% 宽度的占位块
+        "div[class^='vodContainer-list-i-box']", 
         "div[id*='popup-overly']",
         "div.container.light-block",
         "div[style*='margin-top: 10px']",
@@ -253,7 +253,7 @@
         "span.rightBtn",
         "span.van-tab__text.sc-text"
     ],
-    "idsToHide": ["popup-overly"], // 尝试放入专门的 ID 数组
-    "interval": 1000 // 提高检测频率以快速移除弹窗
+    "idsToHide": ["popup-overly"], 
+    "interval": 1000
 }
 }
