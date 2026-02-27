@@ -243,9 +243,14 @@
             "twoColumnAdv"
         ],
         "selectors": [
+            "div.container.light-block",
             "div.container[style=\"margin-top: 10px;\"]",
             "div[style=\"display: block; width: 96%;\"]",
-            "span.rightBtn"
+            "div[style=\"text-align:center;\"]",
+            "span.rightBtn",
+            "span.rightBtn.sc-text",
+            "span.van-tab__text.sc-text.cysc",
+            "span.van-tab__text.sc-text.tcjy"
         ],
         "idsToHide": [],
         "interval": 1600
