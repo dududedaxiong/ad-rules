@@ -241,7 +241,7 @@
             "external-fx",
             "external-fx-content",
             "footer_container",
-            "section",
+            "section.i(-1)",
             "swipeImg",
             "twoColumnAdv",
             "vod-share"
