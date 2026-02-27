@@ -242,7 +242,9 @@
             "footer_container",
             "swipeImg",
             "twoColumnAdv",
-            "vod-share"
+            "van-icon",
+            "vod-share",
+            "header-container.i(0)"
         ],
         "selectors": [
             "div.app-abk.sc-text",
