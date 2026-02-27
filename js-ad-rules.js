@@ -244,8 +244,7 @@
             "swipeImg",
             "twoColumnAdv",
             "van-icon",
-            "vod-share",
-            "van-tab.i(-2)"
+            "vod-share"
         ],
         "selectors": [
             "div.app-abk.sc-text",
@@ -263,8 +262,9 @@
             "span.rightBtn.sc-text",
             "span[class^='cysc']",
             "span[class^='tcjy']",
-            "span[class^='vodContainer-list-item'].i(0)"
-         
+            "span[class^='vodContainer-list-item'].i(0)",
+         ".van-tab:nth-last-child(2)",
+    ".van-tab:nth-last-child(3)"
         ],
         "idsToHide": [
             "popup1",
