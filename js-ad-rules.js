@@ -254,7 +254,7 @@
             "div.section.i(-1)",
             "div.swiper-wrapper[aria-live=\"off\"]",
             "div[class^='vodContainer-list-item'].i(5)",
-            "div[class^='external-block-text-']",
+            "div[class^='external-block-content']",
             "div[style=\"text-align:center;\"]",
             "span.rightBtn",
             "span.rightBtn.sc-text",
