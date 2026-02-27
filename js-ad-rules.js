@@ -139,7 +139,14 @@
         "interval": 1600
     },
     "[看看]": {
-        "keywords": [],
+        "keywords": [
+            {
+                "selector": "uni-view",
+                "keywords": [
+                    "feiji"
+                ]
+            }
+        ],
         "classes": [
             "carousel-inner",
             "carousel-long",
