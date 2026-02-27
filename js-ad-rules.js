@@ -262,10 +262,10 @@
             "div[style=\"text-align:center;\"]",
             "span.rightBtn",
             "span.rightBtn.sc-text",
-            "span.van-tab__text.sc-text.cysc",
-            "span.van-tab__text.sc-text.tcjy",
-            "span[class^='vodContainer-list-item'].i(0)",
-            "div.van-tab.i(-3,-2)"
+            "span[class^='cysc']",
+            "span[class^='tcjy']",
+            "span[class^='vodContainer-list-item'].i(0)"
+         
         ],
         "idsToHide": [
             "popup1",
