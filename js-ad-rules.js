@@ -239,6 +239,7 @@
             "card-content",
             "external-fx",
             "footer_container",
+            "section",
             "swipeImg",
             "twoColumnAdv",
             "vod-share"
@@ -255,7 +256,6 @@
             "span.van-tab__text.sc-text.tcjy",
             "span[class^='vodContainer-list-item'].i(0)",
             "div[class^='vodContainer-list-item'].i(5)"
-            
         ],
         "idsToHide": [],
         "interval": 1600
