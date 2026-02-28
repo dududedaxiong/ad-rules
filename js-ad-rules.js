@@ -271,10 +271,11 @@
             "span[class*='cysc']",
             "span[class*='tcjy']",
             "span[class^='vodContainer-list-item'].i(0)",
-             "div[class*='guaContainer-guaList-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)"
+             "div[class*='guaContainer-guaList-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)",
              "div[class*='guaContainer-guaList-item'].t(小姐上门).p(0)",
     "div[class*='guaContainer-guaList-item'].t(全国空降).p(0)",
     "div[class*='guaContainer-guaList-item'].t(同城约炮).p(0)"
+
 
         ],
         "idsToHide": [
