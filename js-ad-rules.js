@@ -234,7 +234,9 @@
         "interval": 1600
     },
     "[小黄书]": {
-        "keywords": [],
+        "keywords": [
+    { "keywords": ["𔻇𔺱𔹁𔿚", "全𔺘𔽴𔿟"] }
+]
         "classes": [
             "el-dialog__wrapper",
             "external-fx",
