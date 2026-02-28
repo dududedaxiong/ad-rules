@@ -271,7 +271,7 @@
             "span[class*='cysc']",
             "span[class*='tcjy']",
             "span[class^='vodContainer-list-item'].i(0)",
-             "div[class*='guaContainer-guaList-item']:has(p.sc-text:contains('𔻇𔺱𔹁𔿚'))"
+             "div[class*='guaContainer-guaList-item'].t(𔻇𔺱𔹁𔿚).p(0)"
 
         ],
         "idsToHide": [
