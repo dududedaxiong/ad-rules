@@ -140,11 +140,12 @@
     "[看看]": {
         "keywords": [
             {
-                "selector": "uni-view.every-box > uni-view",
+                "selector": "",
                 "keywords": [
-                    "feiji1237"
+                    "𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟"
                 ]
             }
+
         ],
         "classes": [
             "carousel-inner",
@@ -234,9 +235,7 @@
         "interval": 1600
     },
     "[小黄书]": {
-        "keywords": [
-    { "keywords": ["𔻇𔺱𔹁𔿚", "全𔺘𔽴𔿟"] }
-],
+        "keywords": [],
         "classes": [
             "el-dialog__wrapper",
             "external-fx",
