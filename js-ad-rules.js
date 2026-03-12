@@ -174,7 +174,8 @@
             "square-advertisement",
             "tabbar-list",
             "u-notice-bar",
-            "u-popup__content"
+            "u-popup__content",
+            "app-abk"
         ],
         "selectors": [
             "div.square-advertisement.child_div_random",
@@ -185,6 +186,7 @@
             "uni-view.text-adv-list",
             "uni-view[style=\"padding: 0px 20px; margin-top: 50px;\"]"
         ],
+        "div[style=\"transform: translateX(-700%);\"]",
         "idsToHide": [
             "indexPopAd",
             "smailCarouse",
