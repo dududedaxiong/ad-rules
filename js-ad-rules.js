@@ -152,7 +152,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[看看]": {
+    "[kkav]": {
         "keywords": [
             {
                 "selector": "uni-view.every-box > uni-view",
