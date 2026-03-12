@@ -325,5 +325,14 @@
             "popup0"
         ],
         "interval": 1600
+    },
+    "[红桃]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "hcx[class^='div-def']"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
