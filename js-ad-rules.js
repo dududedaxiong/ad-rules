@@ -162,6 +162,7 @@
             }
         ],
         "classes": [
+            "app-abk",
             "carousel-inner",
             "carousel-long",
             "cooperation",
@@ -174,8 +175,7 @@
             "square-advertisement",
             "tabbar-list",
             "u-notice-bar",
-            "u-popup__content",
-            "app-abk"
+            "u-popup__content"
         ],
         "selectors": [
             "div.square-advertisement.child_div_random",
@@ -187,7 +187,6 @@
             "uni-view.text-adv-list",
             "uni-view[style=\"padding: 0px 20px; margin-top: 50px;\"]"
         ],
-        
         "idsToHide": [
             "indexPopAd",
             "smailCarouse",
@@ -305,6 +304,7 @@
         "keywords": [],
         "classes": [
             "caption",
+            "carousel2-container",
             "downurl",
             "footer",
             "xxlaink"
