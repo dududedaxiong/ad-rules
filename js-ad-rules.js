@@ -335,7 +335,7 @@
         ],
         "selectors": [],
         "idsToHide": [
-            "app"
+            "app1"
         ],
         "interval": 1600
     }
