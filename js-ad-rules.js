@@ -286,9 +286,11 @@
     "31xx": {
         "keywords": [],
         "classes": [
-            "footer"
+            "footer",
+            "xxlaink"
         ],
         "selectors": [
+            "a.t(❤&nbsp;约炮&nbsp;❤).p(0)",
             "span[class*='a-link'].t(成人游戏).p(0)"
         ],
         "idsToHide": [
