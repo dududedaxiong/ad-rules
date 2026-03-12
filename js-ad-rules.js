@@ -40,6 +40,12 @@
                 "keywords": [
                     "成人游戏"
                 ]
+            },
+            {
+                "selector": "div>span",
+                "keywords": [
+                    "𔾔𔾵"
+                ]
             }
         ],
         "classes": [
