@@ -330,7 +330,7 @@
         "keywords": [],
         "classes": [
             "app1",
-           "[class^='top-afreasxyelu']"
+           "[src*='data:image/gif']"
         ],
         "selectors": [],
         "idsToHide": [
