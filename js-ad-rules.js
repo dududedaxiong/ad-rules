@@ -329,7 +329,8 @@
     "[红桃]": {
         "keywords": [],
         "classes": [
-            "app1"
+            "app1",
+           "[class^='top-afreasxyelu']"
         ],
         "selectors": [],
         "idsToHide": [
