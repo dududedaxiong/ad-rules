@@ -330,7 +330,7 @@
         "keywords": [],
         "classes": [
             "app1",
-           "div[src*='data:image/gif']"
+           "div[src*='gif']"
         ],
         "selectors": [],
         "idsToHide": [
