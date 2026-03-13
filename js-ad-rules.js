@@ -288,6 +288,7 @@
             "div.swiper-wrapper[aria-live=\"off\"]",
             "div[class*='guaContainer-guaList-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)",
             "div[class^='cvfooter']",
+            "div[class*='saveURLBtn']",
             "div[class^='vodContainer-list-item'].i(5)",
             "div[style=\"text-align:center;\"]",
             "id[class^='left']",
@@ -325,34 +326,7 @@
             "popup0"
         ],
         "interval": 1600
-    },
+    }
  
-  "ht90.vip": {
-    "selectors": [
-      "div.t(下载APP).p(1)",
-      "div.t(附近学生).p(1)",
-      "div.t(棋牌).p(1)",
-      "div.t(金沙).p(1)",
-      "div.t(娱乐).p(1)",
-      "div.t(威尼斯).p(1)",
-      "div.t(注册即送).p(1)",
-      "div.t(开元).p(1)",
-      "div.t(美高梅).p(1)",
-      "div.t(大发).p(1)",
-      "div.t(凤凰).p(1)",
-      "div.t(新葡京).p(1)",
-      "div.t(PG).p(1)",
-      "div[style*='fixed']",
-      "div[style*='z-index: 999']"
-    ],
-    "keywords": [
-      {
-        "selector": "div, a",
-        "keywords": [
-          "下载APP", "开元", "棋牌", "金沙", "威尼斯", "PG娱乐", "注册即送", "官方直营", "春药", "脱衣", "新葡京"
-        ]
-      }
-    ]
-  }
-
+ 
 }
