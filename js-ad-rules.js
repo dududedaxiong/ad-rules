@@ -303,7 +303,8 @@
             "span[class*='cysc']",
             "span[class*='tcjy']",
             "span[class*='vodContainer-list-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)",
-            "span[class^='vodContainer-list-item'].i(0)"
+            "span[class^='vodContainer-list-item'].i(0)",
+            "#popup-overly"
         ],
         "idsToHide": [
             "popup1",
