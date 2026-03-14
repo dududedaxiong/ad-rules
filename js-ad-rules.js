@@ -306,8 +306,7 @@
         ],
         "idsToHide": [
             "popup1",
-            "popup2",
-            "popup-overly"
+            "popup2"
         ],
         "interval": 1600
     },
