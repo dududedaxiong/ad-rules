@@ -331,5 +331,14 @@
             "popup0"
         ],
         "interval": 1600
+    },
+    "[gemini]": {
+        "keywords": [],
+        "classes": [
+            "playback-speed-menu-trigger"
+        ],
+        "selectors": [],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
