@@ -64,8 +64,8 @@
             "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
             "a[class^='downurl']",
             "div[style=\"margin-top: 5px;\"]"
-            "[style*='position:fixed'][style*='display:block'][style*='opacity:0']",
-            "div[style*='vw'][style*='fixed']"
+            "[style*=\"position:fixed\"][style*=\"display:block\"][style*=\"opacity:0\"]",
+            "div[style*=\"vw\"][style*=\"fixed\"]"
 
             
         ],
