@@ -106,7 +106,11 @@
             "div.van-popup.van-popup--center.van-dialog.van-dialog--round-button",
             "div[style=\"display:block;\"]",
             "div[style=\"margin-bottom: 10px;\"]",
-            "span[style=\"color: gold\"]"
+            "span[style=\"color: gold\"]",
+            "span[class*='van-tab'].t(同城约炮).p(0)",
+             "span[class*='van-tab'].t(一键脱衣).p(0)",
+              "span[class*='van-tab'].t(催情春药).p(0)"
+           
         ],
         "idsToHide": [],
         "interval": 1600
