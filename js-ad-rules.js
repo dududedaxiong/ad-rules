@@ -19,7 +19,8 @@
             "*bmatdyz.icu*",
             "*/public/ad*.js*",
             "*/ads/*.js*",
-            "*/advertisement*.js*"
+            "*/advertisement*.js*",
+            "*is_not=1*target*"
         ],
         "keywords": [
             {
@@ -63,7 +64,7 @@
             "uni-view.tabbar-list",
             "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
             "a[class^='downurl']",
-           "div[style*='opacity:0.01']"
+           "div[style*='opacity:0.']"
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
