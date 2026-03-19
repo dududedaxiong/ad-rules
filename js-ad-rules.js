@@ -63,7 +63,7 @@
             "uni-view.tabbar-list",
             "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
             "a[class^='downurl']",
-           "div[style*=\"position:fixed; bottom\"]"
+           "div[style*='opacity:0.01']"
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
