@@ -357,7 +357,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "supjav.com": {
+    "supjav": {
         "keywords": [],
         "classes": [],
         "selectors": [
