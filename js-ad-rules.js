@@ -357,12 +357,21 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "supjav": {
+    "[supjav]": {
         "keywords": [],
         "classes": [],
         "selectors": [
-            "div[class^='movv-ad']",
+            "div[class*='movv-ad']",
             "div[style=\"gap: 0px;\"]"
+        ],
+        "idsToHide": [],
+        "interval": 1600
+    },
+    "[jav]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "div[style=\"width: 330px; height: 185px;\"]"
         ],
         "idsToHide": [],
         "interval": 1600
