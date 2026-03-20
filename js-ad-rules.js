@@ -371,6 +371,7 @@
         "keywords": [],
         "classes": [],
         "selectors": [
+         "div[class*='bottomRight--']",
             "div[style=\"width: 330px; height: 185px;\"]"
         ],
         "idsToHide": [],
