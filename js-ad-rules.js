@@ -301,7 +301,7 @@
             "div[class*='saveURLBtn']",
             "div[class^='cvfooter']",
             "div[class^='external-fx-footer-wrap']",
-            "div[class^='external-fx-top']",
+           
             "div[class^='vodContainer-list-item'].i(5)",
             "div[role=\"dialog\"]",
             "div[style=\"text-align:center;\"]",
@@ -314,8 +314,7 @@
             "span[class*='tcjy']",
             "span[class*='vodContainer-list-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)",
             "span[class^='vodContainer-list-item'].i(0)",
-            "span[style=\"display: block;\"]"
-        ],
+      
         "idsToHide": [
             "popup1",
             "popup2",
