@@ -300,6 +300,7 @@
             "div[class*='personalCenterBtn']",
             "div[class*='saveURLBtn']",
             "div[class^='cvfooter']",
+            "div[class^='external-fx-top']",
             "div[class^='vodContainer-list-item'].i(5)",
             "div[style=\"text-align:center;\"]",
             "id[class^='left']",
