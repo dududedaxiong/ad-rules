@@ -263,7 +263,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[𔻇𔿾𕀌]": {
+    "[xhs]": {
         "keywords": [],
         "classes": [
             "el-dialog__wrapper",
