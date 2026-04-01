@@ -280,6 +280,7 @@
             "dialog__wrapper"
         ],
         "selectors": [
+            "#popup-overly",
             ".van-tab.i(-3,-2)",
             "a.abk-item.abk-banner",
             "a[class*='cysc']",
@@ -295,10 +296,10 @@
             "div.section.i(-1)",
             "div.swiper-wrapper[aria-live=\"off\"]",
             "div[class*='guaContainer-guaList-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)",
-            "div[class^='cvfooter']",
-            "div[class*='saveURLBtn']",
             "div[class*='messageFeedbackBtn']",
             "div[class*='personalCenterBtn']",
+            "div[class*='saveURLBtn']",
+            "div[class^='cvfooter']",
             "div[class^='vodContainer-list-item'].i(5)",
             "div[style=\"text-align:center;\"]",
             "id[class^='left']",
@@ -310,7 +311,7 @@
             "span[class*='tcjy']",
             "span[class*='vodContainer-list-item'].t(𔻇𔺱𔹁𔿚 全𔺘𔽴𔿟).p(0)",
             "span[class^='vodContainer-list-item'].i(0)",
-            "#popup-overly"
+            "span[style=\"display: block;\"]"
         ],
         "idsToHide": [
             "popup1",
@@ -369,5 +370,4 @@
         "idsToHide": [],
         "interval": 1600
     }
-
 }
