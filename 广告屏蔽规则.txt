@@ -1,3 +1,5 @@
+|http://hsck**##p.text-muted.visible-xs
+|http://hsck**##div.stui-foot.clearfix
 |https://gx**.xyz##div[style="margin-top: 10px;width: 100%;margin-bottom:10px;"]
 |https://gx**.xyz##div.stui-pannel_ft.col-pd
 |https://gx**.xyz##div.resou-div-content
@@ -24,7 +26,7 @@
 |https://**/matomo.js
 |https://**/metrika/tag_phono.js
 |https://cdn.lm9093.top**
-|http://hsck12.cctv23.cc/**/189guding.js
-|http://hsck12.cctv23.cc/**/18**.js
-|http://hsck12.cctv23.cc##iframe#iframe1
-|http://hsck12.cctv23.cc##div.stui-player__foot
+|http://hsck**/**/189guding.js
+|http://hsck**/**/18**.js
+|http://hsck**##iframe#iframe1
+|http://hsck**##div.stui-player__foot
