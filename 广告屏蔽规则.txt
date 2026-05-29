@@ -1,3 +1,4 @@
+|https://**/css/stui_block.css?t=**
 |https://fx.qkjajd.cn/dh/640200/c4.json
 |https://mc.yandex.ru/metrika/tag.js
 |https://**?k=**
@@ -43,3 +44,4 @@
 |http://hsck**/**/18**.js
 |http://hsck**##iframe#iframe1
 |http://hsck**##div.stui-player__foot
+|https://**jsss**##div.footer
