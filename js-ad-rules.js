@@ -371,8 +371,10 @@
         "keywords": [],
         "classes": [],
         "selectors": [
+            "0);]",
             "div.t(推广).p(0)",
-            "li.t(广告).p(0)"
+            "li.t(广告).p(0)",
+            "span[style=\"color: rgb(0"
         ],
         "idsToHide": [],
         "interval": 1600
