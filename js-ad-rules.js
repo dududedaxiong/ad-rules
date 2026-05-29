@@ -371,6 +371,7 @@
         "keywords": [],
         "classes": [],
         "selectors": [
+            "div.t(推广).p(0)",
             "li.t(广告).p(0)"
         ],
         "idsToHide": [],
