@@ -225,6 +225,7 @@
             "div.stui-pannel__head.clearfix",
             "div[style=\" max-width:990px; margin:0 auto;\"]",
             "div[style=\"max-width:990px; margin:0 auto;text-align:center;\"]",
+            "li.t(广告).p(0)",
             "li>a>font[color=\"green\"]",
             "ul.stui-header__menu.clearfix"
         ],
