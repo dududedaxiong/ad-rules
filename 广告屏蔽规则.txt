@@ -5,9 +5,13 @@
 |https://**?rid=**
 |https://hd**/tracking.js?t=**
 |https://fx**.json
+|https://**huadu**##div.sponsor-block
+|https://**huadu**##div#yDXUb1
+|https://**huadu**##div[style="display: block; text-align: center; color: #0000FF;"]
+|https://**huadu**##div.stui-pannel.stui-pannel-bg.hidden-sm.clearfix
+|https://**huadu**##div.stui-pannel.stui-pannel-box
 |https://hd20.huaduziyuan.net##div#yDXUb1
 |https://hd20.huaduziyuan.net##div[style="display: block; text-align: center; color: #0000FF;"]
-|https://**huadu**##div.sponsor-block
 |http://hsck**##p.text-muted.visible-xs
 |http://hsck**##div.stui-foot.clearfix
 |https://gx**.xyz##div[style="margin-top: 10px;width: 100%;margin-bottom:10px;"]
