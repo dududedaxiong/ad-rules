@@ -366,5 +366,14 @@
         ],
         "idsToHide": [],
         "interval": 1600
+    },
+    "[花都]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "li.t(广告).p(0)"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
