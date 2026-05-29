@@ -1,4 +1,3 @@
-|https://**/css/stui_block.css?t=**
 |https://fx.qkjajd.cn/dh/640200/c4.json
 |https://mc.yandex.ru/metrika/tag.js
 |https://**?k=**
