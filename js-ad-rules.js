@@ -334,7 +334,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "/[kkav]|[99ggvv]/": {
+    "/[kkav]|[99vvtt]/": {
         "keywords": [
             {
                 "selector": "uni-view.every-box > uni-view",
