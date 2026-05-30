@@ -290,16 +290,6 @@
         ],
         "interval": 1600
     },
-    "[gemini]": {
-        "keywords": [],
-        "classes": [
-            "mdc-button--unelevated",
-            "playback-speed-menu-trigger"
-        ],
-        "selectors": [],
-        "idsToHide": [],
-        "interval": 1600
-    },
     "[极上]": {
         "keywords": [],
         "classes": [],
@@ -379,5 +369,15 @@
         "blockUrls": [
             "2588886663"
         ]
+    },
+    "[kkav|震撼视觉]": {
+        "keywords": [],
+        "classes": [
+            "mdc-button--unelevated",
+            "playback-speed-menu-trigger"
+        ],
+        "selectors": [],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
