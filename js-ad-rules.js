@@ -324,7 +324,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "/[kkav]|[震撼视觉]/": {
+    "[kkav|震撼视觉]": {
         "keywords": [
             {
                 "selector": "uni-view.every-box > uni-view",
@@ -369,15 +369,5 @@
         "blockUrls": [
             "2588886663"
         ]
-    },
-    "[kkav|震撼视觉]": {
-        "keywords": [],
-        "classes": [
-            "mdc-button--unelevated",
-            "playback-speed-menu-trigger"
-        ],
-        "selectors": [],
-        "idsToHide": [],
-        "interval": 1600
     }
 }
