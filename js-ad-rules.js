@@ -158,52 +158,6 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[kkav]": {
-        "keywords": [
-            {
-                "selector": "uni-view.every-box > uni-view",
-                "keywords": [
-                    "feiji1237"
-                ]
-            }
-        ],
-        "classes": [
-            "carousel2-container",
-            "app-abk",
-            "carousel-inner",
-            "carousel-long",
-            "cooperation",
-            "every-box",
-            "every-tabbar",
-            "header-avatar",
-            "info",
-            "news-box",
-            "relative",
-            "square-advertisement",
-            "tabbar-list",
-            "u-notice-bar",
-            "u-popup__content"
-        ],
-        "selectors": [
-            "div.square-advertisement.child_div_random",
-            "div.text-adv-list.child_div_random",
-            "div[style=\"display: flex;flex-wrap: wrap;justify-content: space-between;\"]",
-            "div[style=\"transform: translateX(-700%);\"]",
-            "uni-view.header-avatar",
-            "uni-view.tabbar-list",
-            "uni-view.text-adv-list",
-            "uni-view[style=\"padding: 0px 20px; margin-top: 50px;\"]"
-        ],
-        "idsToHide": [
-            "indexPopAd",
-            "smailCarouse",
-            "smailCarousel"
-        ],
-        "interval": 1600,
-        "blockUrls": [
-            "2588886663"
-        ]
-    },
     "m.mgtv.com": {
         "keywords": [],
         "classes": [
@@ -379,5 +333,51 @@
         ],
         "idsToHide": [],
         "interval": 1600
+    },
+    "/[kk]|[tt]/": {
+        "keywords": [
+            {
+                "selector": "uni-view.every-box > uni-view",
+                "keywords": [
+                    "feiji1237"
+                ]
+            }
+        ],
+        "classes": [
+            "carousel2-container",
+            "app-abk",
+            "carousel-inner",
+            "carousel-long",
+            "cooperation",
+            "every-box",
+            "every-tabbar",
+            "header-avatar",
+            "info",
+            "news-box",
+            "relative",
+            "square-advertisement",
+            "tabbar-list",
+            "u-notice-bar",
+            "u-popup__content"
+        ],
+        "selectors": [
+            "div.square-advertisement.child_div_random",
+            "div.text-adv-list.child_div_random",
+            "div[style=\"display: flex;flex-wrap: wrap;justify-content: space-between;\"]",
+            "div[style=\"transform: translateX(-700%);\"]",
+            "uni-view.header-avatar",
+            "uni-view.tabbar-list",
+            "uni-view.text-adv-list",
+            "uni-view[style=\"padding: 0px 20px; margin-top: 50px;\"]"
+        ],
+        "idsToHide": [
+            "indexPopAd",
+            "smailCarouse",
+            "smailCarousel"
+        ],
+        "interval": 1600,
+        "blockUrls": [
+            "2588886663"
+        ]
     }
 }
