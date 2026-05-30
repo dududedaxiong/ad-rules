@@ -26,20 +26,58 @@
             {
                 "selector": "li>a>font",
                 "keywords": [
-                    "澳门新葡京"
+                    "澳门新葡京",
+                    "永久看片",
+                    "成人游戏",
+                    "同城交友",
+                    "AI脱衣",
+                    "一键脱衣",
+                    "催情春药",
+                    "同城约炮",
+                    "学妹上门"
                 ]
             },
             {
                 "selector": "div>a",
                 "keywords": [
                     "永久看片",
-                    "成人游戏"
+                    "成人游戏",
+                    "同城交友",
+                    "AI脱衣",
+                    "澳门新葡京",
+                    "一键脱衣",
+                    "催情春药",
+                    "同城约炮",
+                    "学妹上门"
+                    
                 ]
             },
             {
                 "selector": "li>a",
                 "keywords": [
-                    "成人游戏"
+                    "永久看片",
+                    "成人游戏",
+                    "同城交友",
+                    "AI脱衣",
+                    "澳门新葡京",
+                    "一键脱衣",
+                    "催情春药",
+                    "同城约炮",
+                    "学妹上门"
+                ]
+            },
+            {
+                "selector": "div>span",
+                "keywords": [
+                    "永久看片",
+                    "成人游戏",
+                    "同城交友",
+                    "AI脱衣",
+                    "澳门新葡京",
+                    "一键脱衣",
+                    "催情春药",
+                    "同城约炮",
+                    "学妹上门"
                 ]
             }
         ],
@@ -58,7 +96,8 @@
             "uni-view.tabbar-list",
             "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
             "a[class^='downurl']",
-            "div[style*='opacity:0.']"
+            "div[style*='opacity:0.']",
+            "div.t(等你哟).p(0)",
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
@@ -324,7 +363,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[kkav|震撼视觉]": {
+    "[你的口口相传是我们更新最大的动力|震撼视觉]": {
         "keywords": [
             {
                 "selector": "uni-view.every-box > uni-view",
