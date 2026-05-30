@@ -66,7 +66,7 @@
                     "学妹上门"
                 ]
             },
-            {
+             {
                 "selector": "div>span",
                 "keywords": [
                     "永久看片",
@@ -97,7 +97,7 @@
             "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
             "a[class^='downurl']",
             "div[style*='opacity:0.']",
-            "div.t(等你哟).p(0)",
+            "div.t(等你哟).p(0)"
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
