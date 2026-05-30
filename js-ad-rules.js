@@ -23,6 +23,7 @@
             "*is_not=1*target*"
         ],
         "keywords": [
+        
             {
                 "selector": "li>a>font",
                 "keywords": [
@@ -79,7 +80,16 @@
                     "同城约炮",
                     "学妹上门"
                 ]
-            }
+            },
+            {
+        "selector": "span,div,p,a",
+        "keywords": [
+        "跳过广告",
+        "秒后跳过",
+        "了解详情",
+        "关闭广告"
+        ]
+    }
         ],
         "classes": [
             "relative",
