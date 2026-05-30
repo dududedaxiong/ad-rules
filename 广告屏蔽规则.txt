@@ -1,3 +1,6 @@
+|https://**/sc/**?n=**
+|https://**/**?i=**&ukey=**
+|https://**/mj**/**
 ##p.w-site
 ##div#appad2
 ##div.carousel2-slide
