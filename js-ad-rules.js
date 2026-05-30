@@ -334,7 +334,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "/[kkav]|[99vvtt]/": {
+    "[震撼视觉]": {
         "keywords": [
             {
                 "selector": "uni-view.every-box > uni-view",
