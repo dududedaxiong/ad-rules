@@ -422,7 +422,8 @@
             "a.t(新葡京).p(0)",
             "a.t(永利).p(0)",
             "a.t(皇冠现金).p(0)",
-            "a[data-eurl^='aHR0']"
+            "a[data-eurl^='aHR0']",
+            "a[href=\"/game.html\"]"
         ],
         "idsToHide": [],
         "interval": 1600
