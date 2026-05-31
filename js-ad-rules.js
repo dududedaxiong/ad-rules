@@ -424,7 +424,7 @@
             "a.t(皇冠现金).p(0)",
             "a[data-eurl^='aHR0']",
             "a[href=\"/game.html\"]",
-            "div.t(APP).p(0)",
+            "div.t(APP).p(1)",
             "div[class*='QQB-tips']",
             "div[style^='font-size']",
             "span[style^='color:#']"
