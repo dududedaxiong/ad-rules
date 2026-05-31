@@ -424,6 +424,8 @@
             "a.t(皇冠现金).p(0)",
             "a[data-eurl^='aHR0']",
             "a[href=\"/game.html\"]",
+            "div[class*='QQB-tips']",
+            "div[style^='font-size']",
             "span[style^='color:#']"
         ],
         "idsToHide": [],
