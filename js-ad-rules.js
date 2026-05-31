@@ -23,7 +23,6 @@
             "*is_not=1*target*"
         ],
         "keywords": [
-        
             {
                 "selector": "li>a>font",
                 "keywords": [
@@ -52,7 +51,6 @@
                     "同城约炮",
                     "学妹上门",
                     "成人直播"
-                    
                 ]
             },
             {
@@ -69,7 +67,7 @@
                     "学妹上门"
                 ]
             },
-             {
+            {
                 "selector": "div>span",
                 "keywords": [
                     "永久看片",
@@ -84,7 +82,6 @@
                     "成人直播"
                 ]
             }
-  
         ],
         "classes": [
             "relative",
@@ -106,7 +103,6 @@
             "li.t(同城约炮).p(0)",
             "li.t(春药商城).p(0)",
             "li.t(注册即送).p(0)"
-            
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
@@ -417,5 +413,17 @@
         "blockUrls": [
             "2588886663"
         ]
+    },
+    "[@西瓜]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "a.t(世界杯).p(0)",
+            "a.t(新葡京).p(0)",
+            "a.t(永利).p(0)",
+            "a.t(皇冠现金).p(0)"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
