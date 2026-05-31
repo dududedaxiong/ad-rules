@@ -423,7 +423,8 @@
             "a.t(永利).p(0)",
             "a.t(皇冠现金).p(0)",
             "a[data-eurl^='aHR0']",
-            "a[href=\"/game.html\"]"
+            "a[href=\"/game.html\"]",
+            "span[style^='color:#']"
         ],
         "idsToHide": [],
         "interval": 1600
