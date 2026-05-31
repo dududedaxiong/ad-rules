@@ -425,6 +425,7 @@
             "a[data-eurl^='aHR0']",
             "a[href=\"/game.html\"]",
             "div[class*='QQB-tips']",
+            "div[span*='APP']",
             "div[style^='font-size']",
             "span[style^='color:#']"
         ],
