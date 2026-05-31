@@ -1,3 +1,8 @@
+##div.list-head-banner
+##div.a_texts
+##div.a_icons
+##div.a_banner
+##div.gonggao
 |https://dy.kukutool.com##div.flex.items-center
 |https://dy.kukutool.com##div.flex.gap-4
 |https://hm.baidu.com/hm.js?**
