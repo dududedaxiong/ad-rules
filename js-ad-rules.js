@@ -103,7 +103,9 @@
             "a[class^='downurl']",
             "div[style*='opacity:0.']",
             "div[class*='a-link'].t(等你哟).p(0)",
-            "div[class*='stui-vodlist__box'].t(同城约炮).p(0)"
+            "li.t(同城约炮).p(0)",
+            "li.t(春药商城).p(0)"
+            
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
