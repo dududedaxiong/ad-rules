@@ -1,3 +1,4 @@
+##div#aabanner2
 ##div#bottomFixed
 ##div.list-head-banner
 ##div.a_texts
