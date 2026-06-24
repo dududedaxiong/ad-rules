@@ -1,15 +1,5 @@
 [
     {
-        "name": "16t0k.top",
-        "hosts": [
-            "16t0k.top",
-            "l6t0k.top"
-        ],
-        "regex": [
-            "#EXTINF:[\\s\\S]*?001\\.ts"
-        ]
-    },
-    {
         "hosts": [
             "kuaikan"
         ],
@@ -18,6 +8,16 @@
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:5,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:2\\.4,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:1\\.467,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "16t0k.top",
+        "hosts": [
+            "16t0k.top",
+            "l6t0k.top"
+        ],
+        "regex": [
+            "#EXTINF:[\\s\\S]*?001\\.ts"
         ]
     },
     {
@@ -63,7 +63,8 @@
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*\\.ts",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,.*?ts",
-            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:2,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:2,[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "#EXT-X-KEY:METHOD=AES-128,URI=.*?pre_key.*?[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
     {
@@ -119,7 +120,8 @@
             "535fs",
             "dzlndygh",
             "hdvjl",
-            "xsmj"
+            "xsmj",
+            "server18"
         ],
         "regex": [
             "#EXTINF:[\\s\\S]*?encrypt0005\\.ts"
@@ -185,7 +187,6 @@
         "hosts": [
             "97img",
             "vvip",
-            "thm3u8",
             "askzybf"
         ],
         "name": "去你的广告",
@@ -316,12 +317,21 @@
         ]
     },
     {
-        "name": "测试",
+        "name": "bfbfhao",
         "hosts": [
-            "test.com"
+            "bfbfhao.com"
         ],
         "regex": [
-            "不痛快"
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "红杏",
+        "hosts": [
+            "v7.slv"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     }
 ]
