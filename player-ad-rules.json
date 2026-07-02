@@ -328,7 +328,9 @@
     {
         "name": "红杏",
         "hosts": [
-            "v7.slv"
+            "v7.slv",
+            "senlin",
+            "v5.lbv"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
