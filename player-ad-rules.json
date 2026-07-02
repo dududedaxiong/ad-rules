@@ -58,6 +58,7 @@
         "name": "jkunnzyx",
         "regex": [
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "##EXT-X-KEY:METHOD=NONE,\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*\\.ts",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*\\.ts",
@@ -330,7 +331,10 @@
         "hosts": [
             "v7.slv",
             "senlin",
-            "v5.lbv"
+            "v5.lbv",
+            "lbsl20",
+            "sysl202",
+            "2026.com"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
