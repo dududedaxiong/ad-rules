@@ -334,7 +334,8 @@
             "v5.lbv",
             "lbsl20",
             "sysl202",
-            "2026.com"
+            "2026.com",
+            "kjbw"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
