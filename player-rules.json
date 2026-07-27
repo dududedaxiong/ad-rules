@@ -395,7 +395,7 @@
     {
         "name": "18j",
         "hosts": [
-            "18j"
+            "m3u8.cdn"
         ],
         "regex": [
             "#EXT-X-PLAYLIST-TYPE:VOD\\r*\\n*#EXTINF:4.000000,[\\s\\S]*?#EXT-X-DISCONTINUITY"
