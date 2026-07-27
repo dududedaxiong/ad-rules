@@ -49,7 +49,6 @@
             "lbv3lb",
             "sybf",
             "qrtuv",
-            "vostrely",
             "thm3u8.vip",
             "newljlj.com",
             ".slslvip",
@@ -57,13 +56,16 @@
         ],
         "name": "jkunnzyx",
         "regex": [
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "##EXT-X-KEY:METHOD=NONE,\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*\\.ts",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*\\.ts",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY",
-            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,.*?ts",
-            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:2,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,.*?TO6a.ts",
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:2,[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "#EXT-X-KEY:METHOD=AES-128,URI=.*?pre_key.*?[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
     {
@@ -90,7 +92,8 @@
         ],
         "name": "55p去插",
         "regex": [
-            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:4\\.4,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:4\\.4,[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
     {
@@ -119,7 +122,8 @@
             "535fs",
             "dzlndygh",
             "hdvjl",
-            "xsmj"
+            "xsmj",
+            "server18"
         ],
         "regex": [
             "#EXTINF:[\\s\\S]*?encrypt0005\\.ts"
@@ -131,6 +135,7 @@
         ],
         "name": "fq去插",
         "regex": [
+            "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?800kb[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128[\\s\\S]*?#EXTINF:3[\\s\\S]*GcS4RzMZ[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
@@ -185,7 +190,6 @@
         "hosts": [
             "97img",
             "vvip",
-            "thm3u8",
             "askzybf"
         ],
         "name": "去你的广告",
@@ -316,21 +320,85 @@
         ]
     },
     {
-        "name": "测试",
+        "name": "bfbfhao",
         "hosts": [
-            "test.com"
+            "bfbfhao.com"
         ],
         "regex": [
-            "不痛快"
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
     {
         "name": "红杏",
         "hosts": [
-            "v7.slv"
+            "v7.slv",
+            "senlin",
+            "v5.lbv",
+            "lbsl20",
+            "sysl202",
+            "2026.com",
+            "kjbw",
+            "sex8",
+            "didib"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "奶奶香",
+        "hosts": [
+            "vostrely"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "鸡坤",
+        "hosts": [
+            "jkhabkrqjbj"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "ckbh",
+        "hosts": [
+            "ckbhm3u8"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?600kb[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "小鸡",
+        "hosts": [
+            "xjzym3u",
+            "gakkxx.top"
+        ],
+        "regex": [
+            "#EXTINF[\\s\\S]*?\\\/AD[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "#EXTINF[\\s\\S]*?\\\/ad[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "ckzy3",
+        "hosts": [
+            "ckzy3"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?800kb[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "18j",
+        "hosts": [
+            "18j"
+        ],
+        "regex": [
+            "#EXT-X-PLAYLIST-TYPE:VOD\\r*\\n*#EXTINF:4.000000,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     }
 ]
