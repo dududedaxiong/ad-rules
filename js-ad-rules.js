@@ -432,5 +432,24 @@
         ],
         "idsToHide": [],
         "interval": 1600
+    },
+    "CNZZ": {
+        "keywords": [
+            {
+                "selector": "ul",
+                "keywords": [
+                    "凤凰国际"
+                ]
+            }
+        ],
+        "classes": [
+            "home-conts.home-conts-top",
+            "movie-ad-stack"
+        ],
+        "selectors": [
+            "div[style=\"display: none !important; transform: translateX(-100%);\"]"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
 }
