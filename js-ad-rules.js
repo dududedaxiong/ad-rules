@@ -436,9 +436,9 @@
     "[CNZZ]": {
         "keywords": [
             {
-                "selector": "ul",
+                "selector": "li>h2",
                 "keywords": [
-                    "凤凰国际"
+                    "推荐"
                 ]
             }
         ],
