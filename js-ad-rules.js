@@ -433,7 +433,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[CNZZ]": {
+    "[@CNZZ]": {
         "keywords": [
             {
                 "selector": "li>h2",
