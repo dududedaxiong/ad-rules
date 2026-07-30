@@ -433,7 +433,7 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "CNZZ": {
+    "[CNZZ]": {
         "keywords": [
             {
                 "selector": "ul",
@@ -447,7 +447,8 @@
             "movie-ad-stack"
         ],
         "selectors": [
-            "div[style=\"display: none !important; transform: translateX(-100%);\"]"
+            "div[style=\"display: none !important; transform: translateX(-100%);\"]",
+            "footer.app-footer"
         ],
         "idsToHide": [],
         "interval": 1600
