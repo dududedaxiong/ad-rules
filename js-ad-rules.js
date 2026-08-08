@@ -156,7 +156,8 @@
             "div[style*='margin:10px']",
             "div[role='dialog']",
             "div[style*='margin-bottom:']",
-            "div[style*='background-size: 360px 120px']"
+            "div[style*='background-size: 360px 120px']",
+            "div[style*='height: 17px; left: 1px; bottom: 120px;']"
         ],
         "idsToHide": [],
         "interval": 1600
