@@ -131,7 +131,8 @@
                 "keywords": [
                     "一键脱衣",
                     "催情春药",
-                    "同城约炮"
+                    "同城约炮",
+                    "商务伴游"
                 ]
             }
         ],
@@ -149,7 +150,8 @@
             "span[class*='van-tab'].t(同城约炮).p(0)",
             "span[class*='van-tab'].t(一键脱衣).p(0)",
             "span[class*='van-tab'].t(催情春药).p(0)",
-            "div[style*='opacity:0.']"
+            "div[style*='opacity:0.']",
+            "div[style*='width: calc']"
         ],
         "idsToHide": [],
         "interval": 1600
