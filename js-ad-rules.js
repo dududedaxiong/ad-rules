@@ -123,7 +123,9 @@
             "https://**/public/axios.min.js",
             "https://**/worker/PicWorker.js?v=**",
             "https://246886mc.ohdam3.com/**",
-            "https://bmatdyz.icu/**"
+            "https://bmatdyz.icu/**",
+            "https://js25.iislm.com/ap.js",
+            "https://cdn2.dd.bcdfga.com/public/statics/js/**.js"
         ],
         "keywords": [
             {
@@ -151,7 +153,8 @@
             "span[class*='van-tab'].t(一键脱衣).p(0)",
             "span[class*='van-tab'].t(催情春药).p(0)",
             "div[style*='opacity:0.']",
-            "div[style*='width: calc']"
+            "div[style*='width: calc']",
+            "div[style*='margin:10px']"
         ],
         "idsToHide": [],
         "interval": 1600
