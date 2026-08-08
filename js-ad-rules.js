@@ -154,7 +154,9 @@
             "span[class*='van-tab'].t(催情春药).p(0)",
             "div[style*='opacity:0.']",
             "div[style*='width: calc']",
-            "div[style*='margin:10px']"
+            "div[style*='margin:10px']",
+            "div[role='dialog']",
+            "div[style*='margin-bottom:']"
         ],
         "idsToHide": [],
         "interval": 1600
