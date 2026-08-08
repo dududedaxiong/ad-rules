@@ -113,7 +113,7 @@
     "_config": {
         "defaultInterval": 600
     },
-    "/^(esa\\.some163\\.com)$/": {
+    "/^(cn5\\.91short\\.com|esa\\.some163\\.com)$/": {
         "blockUrls": [
             "**?c=1&n=",
             "**?n=",
