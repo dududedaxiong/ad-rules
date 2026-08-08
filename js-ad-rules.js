@@ -113,7 +113,7 @@
     "_config": {
         "defaultInterval": 600
     },
-    "/cn\\d+\\.91short\\.com/": {
+    "/cn\\d+\\.91short\\.com/||https://esa.some163.com": {
         "blockUrls": [
             "**?c=1&n=",
             "**?n=",
