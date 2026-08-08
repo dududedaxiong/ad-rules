@@ -141,7 +141,6 @@
         "classes": [
             "mda",
             "player-info",
-            "van-overlay",
             "van-popup"
         ],
         "selectors": [
@@ -156,7 +155,8 @@
             "div[style*='width: calc']",
             "div[style*='margin:10px']",
             "div[role='dialog']",
-            "div[style*='margin-bottom:']"
+            "div[style*='margin-bottom:']",
+            "div[style*='background-size: 360px 120px']"
         ],
         "idsToHide": [],
         "interval": 1600
