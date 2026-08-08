@@ -142,7 +142,8 @@
             "mda",
             "player-info",
             "van-overlay",
-            "van-popup"
+            "van-popup",
+            "msop100"
         ],
         "selectors": [
             "div.van-popup.van-popup--center.van-dialog.van-dialog--round-button",
