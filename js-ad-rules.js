@@ -492,7 +492,8 @@
             "aaCoverAd",
             "movie-detail-float",
             "ads-refresh",
-            "movie-card-midbanner"
+            "movie-card-midbanner",
+            "promp-container-none"
         ],
         "selectors": [
             "li.t(推荐)",
@@ -543,7 +544,8 @@
             "aaCoverAd",
             "movie-detail-float",
             "ads-refresh",
-            "movie-card-midbanner"
+            "movie-card-midbanner",
+            "promp-container-none"
         ],
         "selectors": [
             "li.t(推荐)",
