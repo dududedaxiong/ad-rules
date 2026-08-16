@@ -494,7 +494,7 @@
             "ads-refresh",
             "movie-card-midbanner",
             "promp-container-none",
-            "movie-ad-stack"
+            "home-conts.home-conts-top"
         ],
         "selectors": [
             "li.t(推荐)",
@@ -547,7 +547,7 @@
             "ads-refresh",
             "movie-card-midbanner",
             "promp-container-none",
-            "movie-ad-stack"
+            "home-conts.home-conts-top"
         ],
         "selectors": [
             "li.t(推荐)",
