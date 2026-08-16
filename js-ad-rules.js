@@ -493,6 +493,7 @@
             "movie-detail-float",
             "ads-refresh",
             "movie-card-midbanner",
+            "promp-container-none",
             "movie-ad-stack"
         ],
         "selectors": [
@@ -512,8 +513,7 @@
             "li.t(爆奖)",
             "li.t(免费)",
             "li.t(注册)",
-            "li.t(下载)",
-            "main.app-main.app-main-movie"
+            "li.t(下载)"
         ],
         "idsToHide": [],
         "interval": 1000
@@ -545,6 +545,8 @@
             "aaCoverAd",
             "movie-detail-float",
             "ads-refresh",
+            "movie-card-midbanner",
+            "promp-container-none",
             "movie-ad-stack"
         ],
         "selectors": [
@@ -564,8 +566,7 @@
             "li.t(爆奖)",
             "li.t(免费)",
             "li.t(注册)",
-            "li.t(下载)",
-            "main.app-main.app-main-movie"
+            "li.t(下载)"
         ],
         "idsToHide": [],
         "interval": 1000
