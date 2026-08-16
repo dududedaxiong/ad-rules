@@ -464,11 +464,9 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[@99ffrr.com]": {
+    "[99ffrr.com]": {
         "keywords": [],
-        "classes": [
-
-        ],
+        "classes": [],
         "selectors": [
             "div.home-conts.home-conts-top",
             "div.movie-ad-stack",
