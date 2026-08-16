@@ -153,7 +153,6 @@
             "span[class*='van-tab'].t(催情春药).p(0)",
             "div[style*='opacity:0.']",
             "div[style*='width: calc']",
-            "div[style*='margin:10px']",
             "div[role='dialog']",
             "div[style*='margin-bottom:']",
             "div[style*='background-size: 360px 120px']",
@@ -231,9 +230,13 @@
             "div.stui-pannel__head.clearfix",
             "div[style=\" max-width:990px; margin:0 auto;\"]",
             "div[style=\"max-width:990px; margin:0 auto;text-align:center;\"]",
+            "li.t(推荐).p(0)",
             "li.t(广告).p(0)",
             "li>a>font[color=\"green\"]",
-            "ul.stui-header__menu.clearfix"
+            "ul.stui-header__menu.clearfix",
+            "div.home-conts.home-conts-top",
+            "div.movie-ad-stack",
+            "div.home-conts.home-conts-top"
         ],
         "idsToHide": [],
         "interval": 1600,
@@ -457,6 +460,19 @@
         "selectors": [
             "div[style=\"display: none !important; transform: translateX(-100%);\"]",
             "footer.app-footer"
+        ],
+        "idsToHide": [],
+        "interval": 1600
+    },
+    "[@99ffrr.com]": {
+        "keywords": [],
+        "classes": [
+
+        ],
+        "selectors": [
+            "div.home-conts.home-conts-top",
+            "div.movie-ad-stack",
+            "li.t(推荐).p(0)"
         ],
         "idsToHide": [],
         "interval": 1600
