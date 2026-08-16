@@ -113,6 +113,54 @@
     "_config": {
         "defaultInterval": 600
     },
+    "/^(cn5\\.91short\\.com|esa\\.some163\\.com)$/": {
+        "blockUrls": [
+            "**?c=1&n=",
+            "**?n=",
+            "*/public/ad**v=*",
+            "*/public/statics/js/*",
+            "https://**.icu/**?**",
+            "https://**/public/axios.min.js",
+            "https://**/worker/PicWorker.js?v=**",
+            "https://246886mc.ohdam3.com/**",
+            "https://bmatdyz.icu/**",
+            "https://js25.iislm.com/ap.js",
+            "https://cdn2.dd.bcdfga.com/public/statics/js/**.js"
+        ],
+        "keywords": [
+            {
+                "selector": "a>span.van-tab__text",
+                "keywords": [
+                    "一键脱衣",
+                    "催情春药",
+                    "同城约炮",
+                    "商务伴游"
+                ]
+            }
+        ],
+        "classes": [
+            "mda",
+            "player-info",
+            "van-popup"
+        ],
+        "selectors": [
+            "div.van-popup.van-popup--center.van-dialog.van-dialog--round-button",
+            "div[style=\"display:block;\"]",
+            "div[style=\"margin-bottom: 10px;\"]",
+            "span[style=\"color: gold\"]",
+            "span[class*='van-tab'].t(同城约炮).p(0)",
+            "span[class*='van-tab'].t(一键脱衣).p(0)",
+            "span[class*='van-tab'].t(催情春药).p(0)",
+            "div[style*='opacity:0.']",
+            "div[style*='width: calc']",
+            "div[role='dialog']",
+            "div[style*='margin-bottom:']",
+            "div[style*='background-size: 360px 120px']",
+            "div[style*='height: 17px; left: 1px; bottom: 120px;']"
+        ],
+        "idsToHide": [],
+        "interval": 1600
+    },
     "_exclude": [
         "127.0.0.1",
         "a123tv.com",
@@ -416,18 +464,8 @@
         "idsToHide": [],
         "interval": 1600
     },
-    "[99ffrr.com]": {
-        "keywords": [],
-        "classes": [],
-        "selectors": [
-            "div.home-conts.home-conts-top",
-            "div.movie-ad-stack",
-            "li.t(推荐).p(0)"
-        ],
-        "idsToHide": [],
-        "interval": 1600
-    },
-    "[66kkxx|kkav]": {
+  
+    "[99ffrr.com|kkav|66kkxx]": {
         "keywords": [],
         "classes": [
             "movie-ad-stack",
@@ -473,39 +511,10 @@
             "li.t(爆奖)",
             "li.t(免费)",
             "li.t(注册)",
-            "li.t(下载)",
-            "li.not_t(无码|素人|经典|国产|日韩).t(澳门|PG|棋牌|博彩|赌场|娱乐城|金沙|威尼斯|银河)",
-            "div.not_t(无码|素人|经典|国产|日韩).t(澳门|PG|棋牌|博彩|赌场)"
+            "li.t(下载)"
         ],
         "idsToHide": [],
-        "interval": 1000,
-        "blockUrls": [
-            "*99ffrr.com*",
-            "*kkav*.com*",
-            "*66kkxx.com*",
-            "*e48662518.top*",
-            "*pg46a.3363865.cc*",
-            "*tcls186b.com*",
-            "*jj35266.vip*",
-            "*3120120.cc*",
-            "*60pg0469.cc*",
-            "*w87433769.vip*",
-            "*kr5rige.cc*",
-            "*chaoshouf.com*",
-            "*xn--9kqz59b4md97l*",
-            "*xn--487-7e4e657b9hu229a*",
-            "*xn--9191-oh1g65uwx6fuyb*",
-            "*.alicdn.com/imgextra*",
-            "*.umoinvest.com/gif*",
-            "*.ftihzjg.com*",
-            "*.daigraphia.com*",
-            "*.szpro360.com*",
-            "*.hrzs168.com*",
-            "*.ah7907.com*",
-            "*.meiyajudec.com*",
-            "*.kuangbian1.com*",
-            "*.fmjmm.com*"
-        ]
+        "interval": 1000
     },
     "/kkav|66kkxx|99ffrr/": {
         "keywords": [],
@@ -553,12 +562,11 @@
             "li.t(爆奖)",
             "li.t(免费)",
             "li.t(注册)",
-            "li.t(下载)",
-            "li.not_t(无码|素人|经典|国产|日韩).t(澳门|PG|棋牌|博彩|赌场|娱乐城|金沙|威尼斯|银河)",
-            "div.not_t(无码|素人|经典|国产|日韩).t(澳门|PG|棋牌|博彩|赌场)"
+            "li.t(下载)"
         ],
         "idsToHide": [],
         "interval": 1000
-   
     }
+
+
 }
