@@ -493,7 +493,6 @@
             "movie-detail-float",
             "ads-refresh",
             "movie-card-midbanner",
-            "promp-container-none",
             "movie-ad-stack"
         ],
         "selectors": [
@@ -546,8 +545,6 @@
             "aaCoverAd",
             "movie-detail-float",
             "ads-refresh",
-            "movie-card-midbanner",
-            "promp-container-none",
             "movie-ad-stack"
         ],
         "selectors": [
