@@ -514,7 +514,7 @@
             "li.t(免费)",
             "li.t(注册)",
             "li.t(下载)",
-            "div.promp-list.promp-list-inline.promp-list-inline-compact"
+            "div.home-conts.home-conts-top"
         ],
         "idsToHide": [],
         "interval": 1000
@@ -568,7 +568,7 @@
             "li.t(免费)",
             "li.t(注册)",
             "li.t(下载)",
-            "div.promp-list.promp-list-inline.promp-list-inline-compact"
+            "div.home-conts.home-conts-top"
         ],
         "idsToHide": [],
         "interval": 1000
