@@ -56,12 +56,11 @@
         ],
         "name": "jkunnzyx",
         "regex": [
-        "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "##EXT-X-KEY:METHOD=NONE,\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3\\.333,[\\s\\S]*\\.ts",
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY",
-            
             "#EXT-X-KEY:METHOD=AES-128,URI=.*?\\r*\\n*#EXTINF:3,[\\s\\S]*\\.ts",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY",
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,.*?TO6a.ts",
@@ -227,7 +226,7 @@
         ],
         "regex": [
             "#EXT-X-DISCONTINUITY[\\s\\S]*?ad.*?\\.ts",
-            "/#EXT-X-DISCONTINUITY[\\s\\S]*?ad00[\\s\\S]*?#EXT-X-DISCONTINUITY/im"
+            "\/#EXT-X-DISCONTINUITY[\\s\\S]*?ad00[\\s\\S]*?#EXT-X-DISCONTINUITY\/im"
         ]
     },
     {
@@ -346,20 +345,19 @@
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
-     {
+    {
         "name": "奶奶香",
         "hosts": [
-            "vostrely",
+            "vostrely"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=NONE\\r*\\n*#EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
-     {
+    {
         "name": "鸡坤",
         "hosts": [
-            "jkhabkrqjbj",
-           
+            "jkhabkrqjbj"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?EXTINF:3,[\\s\\S]*?#EXT-X-DISCONTINUITY"
@@ -368,7 +366,7 @@
     {
         "name": "ckbh",
         "hosts": [
-            "ckbhm3u8",
+            "ckbhm3u8"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?600kb[\\s\\S]*?#EXT-X-DISCONTINUITY"
@@ -381,17 +379,35 @@
             "gakkxx.top"
         ],
         "regex": [
-            "#EXTINF[\\s\\S]*?\\/AD[\\s\\S]*?#EXT-X-DISCONTINUITY",
-            "#EXTINF[\\s\\S]*?\\/ad[\\s\\S]*?#EXT-X-DISCONTINUITY"
+            "#EXTINF[\\s\\S]*?\\\/AD[\\s\\S]*?#EXT-X-DISCONTINUITY",
+            "#EXTINF[\\s\\S]*?\\\/ad[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
     {
         "name": "ckzy3",
         "hosts": [
-            "ckzy3",
+            "ckzy3"
         ],
         "regex": [
             "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?800kb[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     },
+    {
+        "name": "18j",
+        "hosts": [
+            "m3u8.cdn"
+        ],
+        "regex": [
+            "#EXT-X-PLAYLIST-TYPE:VOD\\r*\\n*#EXTINF:4.000000,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "hwzcfz",
+        "hosts": [
+            "hwzcfz"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?dpew.erlgnf.com[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    }
 ]
