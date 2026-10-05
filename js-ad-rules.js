@@ -1,7 +1,24 @@
 {
     "*": {
         "blockUrls": [
-
+            "*googlesyndication.com*",
+            "*doubleclick.net*",
+            "*adservice.google.*",
+            "*pagead2.googlesyndication.com*",
+            "*ads.yahoo.com*",
+            "*adnxs.com*",
+            "*pubmatic.com*",
+            "*criteo.com*",
+            "*taboola.com*",
+            "*outbrain.com*",
+            "*revcontent.com*",
+            "*mgid.com*",
+            "*onesignal.com*",
+            "*bmatdyz.icu*",
+            "*/public/ad*.js*",
+            "*/ads/*.js*",
+            "*/advertisement*.js*",
+            "*is_not=1*target*"
         ],
         "keywords": [
             {
