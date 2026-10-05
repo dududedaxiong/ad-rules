@@ -367,6 +367,10 @@
         "interval": 1600
     },
     "[花都]": {
+     "blockUrls": [
+     "https://**?rid=**",
+     "https://mc.yandex.ru/metrika/tag.js"
+     ],
         "keywords": [],
         "classes": [],
         "selectors": [
