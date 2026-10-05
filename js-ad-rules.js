@@ -373,6 +373,7 @@
             "0);]",
             "div.t(推广).p(0)",
             "h3.t(友情链接).p(0)",
+            "div.row.t(打不开时请把).p(0)",
             "li.t(广告).p(0)",
             "span[style=\"color: rgb(0, 0, 0);]"
         ],
@@ -514,7 +515,8 @@
             "li.t(免费)",
             "li.t(注册)",
             "li.t(下载)",
-            "div.home-conts.home-conts-top"
+            "div.home-conts.home-conts-top",
+            "div.home-conts.home-conts-bottom"
         ],
         "idsToHide": [],
         "interval": 1000
@@ -568,7 +570,8 @@
             "li.t(免费)",
             "li.t(注册)",
             "li.t(下载)",
-            "div.home-conts.home-conts-top"
+            "div.home-conts.home-conts-top",
+            "div.home-conts.home-conts-bottom"
         ],
         "idsToHide": [],
         "interval": 1000
