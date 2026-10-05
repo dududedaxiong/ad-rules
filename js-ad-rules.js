@@ -84,25 +84,19 @@
             }
         ],
         "classes": [
-            "relative",
             "text-adv-list",
             "u-notice__content",
             "u-swiper",
             "uni-swiper-slides"
         ],
         "selectors": [
-            "ads",
             "div.uni-swiper-slides[style=\"inset: 0px;\"]",
             "i.icon.iconfont.icon-account",
             "uni-view.news-box",
             "uni-view.tabbar-list",
             "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
             "a[class^='downurl']",
-            "div[style*='opacity:0.']",
-            "div[class*='a-link'].t(等你哟).p(0)",
-            "li.t(同城约炮).p(0)",
-            "li.t(春药商城).p(0)",
-            "li.t(注册即送).p(0)"
+            "div[style*='opacity:0.']"
         ],
         "idsToHide": [
             "__clb-spot_2090934_fxi_1",
@@ -367,12 +361,12 @@
         "interval": 1600
     },
     "[花都]": {
-     "blockUrls": [
-     "*?rid=*",
-     "*yandex.ru/metrika*",
-     "*aizhantj.com*",
-     "*mc.yandex*"
-     ],
+        "blockUrls": [
+            "*?rid=*",
+            "*yandex.ru/metrika*",
+            "*aizhantj.com*",
+            "*mc.yandex*"
+        ],
         "keywords": [],
         "classes": [],
         "selectors": [
@@ -471,7 +465,6 @@
         "idsToHide": [],
         "interval": 1600
     },
-  
     "[99ffrr.com|kkav|66kkxx]": {
         "keywords": [],
         "classes": [
@@ -581,7 +574,17 @@
         ],
         "idsToHide": [],
         "interval": 1000
+    },
+    "[危险-仅特定站点手动启用]": {
+        "keywords": [],
+        "classes": [],
+        "selectors": [
+            "div[class*='a-link'].t(等你哟).p(0)",
+            "li.t(同城约炮).p(0)",
+            "li.t(春药商城).p(0)",
+            "li.t(注册即送).p(0)"
+        ],
+        "idsToHide": [],
+        "interval": 1600
     }
-
-
 }
