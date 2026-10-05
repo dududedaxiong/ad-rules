@@ -13,6 +13,8 @@
             "*outbrain.com*",
             "*revcontent.com*",
             "*mgid.com*",
+            "*push.*",
+            "*notification.*",
             "*onesignal.com*",
             "*bmatdyz.icu*",
             "*/public/ad*.js*",
@@ -82,10 +84,20 @@
             }
         ],
         "classes": [
-    
+            "relative",
+            "text-adv-list",
+            "u-notice__content",
+            "u-swiper",
+            "uni-swiper-slides"
         ],
         "selectors": [
             "ads",
+            "div.uni-swiper-slides[style=\"inset: 0px;\"]",
+            "i.icon.iconfont.icon-account",
+            "uni-view.news-box",
+            "uni-view.tabbar-list",
+            "uni-view[style=\"display: flex; flex-wrap: wrap; justify-content: space-between;\"]",
+            "a[class^='downurl']",
             "div[style*='opacity:0.']",
             "div[class*='a-link'].t(等你哟).p(0)",
             "li.t(同城约炮).p(0)",
