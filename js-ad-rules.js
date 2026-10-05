@@ -368,8 +368,10 @@
     },
     "[花都]": {
      "blockUrls": [
-     "https://**?rid=**",
-     "https://mc.yandex.ru/metrika/tag.js"
+     "*?rid=*",
+     "*yandex.ru/metrika*",
+     "*aizhantj.com*",
+     "*mc.yandex*"
      ],
         "keywords": [],
         "classes": [],
