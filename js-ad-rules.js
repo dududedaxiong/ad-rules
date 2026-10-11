@@ -186,7 +186,8 @@
             "ul.stui-header__menu.clearfix",
             "div.home-conts.home-conts-top",
             "div.movie-ad-stack",
-            "div.home-conts.home-conts-top"
+            "div.home-conts.home-conts-top",
+            "div.qq"
         ],
         "idsToHide": [],
         "interval": 1600,
