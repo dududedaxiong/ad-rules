@@ -70,7 +70,10 @@
     },
     {
         "hosts": [
-            "yutubf"
+            "yutubf",
+            "jqwevnlkw",
+            "iuewgnbvk",
+            "didibo"
         ],
         "name": "yutubf",
         "regex": [
@@ -399,6 +402,15 @@
         ],
         "regex": [
             "#EXT-X-PLAYLIST-TYPE:VOD\\r*\\n*#EXTINF:4.000000,[\\s\\S]*?#EXT-X-DISCONTINUITY"
+        ]
+    },
+    {
+        "name": "hwzcfz",
+        "hosts": [
+            "hwzcfz"
+        ],
+        "regex": [
+            "#EXT-X-KEY:METHOD=AES-128,URI[\\s\\S]*?dpew.erlgnf.com[\\s\\S]*?#EXT-X-DISCONTINUITY"
         ]
     }
 ]
